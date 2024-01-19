@@ -1,28 +1,22 @@
+package smartworld;
 
-public class Primenumber {
+public class Prime {
 
 	public static void main(String[] args) {
-		int x = 79;
-		int y=0;
-		int count = 0;
-		y = x/2;
-		if(x==1 || x==0) {
-			System.out.println(x + " is not a prime number");
-		}else
-		{
-		for(int i=2;i<=y;i++){
-					if(x%i==0) {
-				System.out.println(x+" is not a prime number");
-				};
-				i++;
-				count=1;
-				break;
-			}
-		}
-		if(count==0) {
-			System.out.println(x+" is a prime number");
-		}
-		
+	
+		int num = 29; 
+	    boolean flag = false;
+	    for (int i = 2; i <= num / 2; i++) {
+	      if (num % i == 0) {
+	        flag = true; 
+	        break;
+	      }
+	    }
+	    if (!flag) // 
+	      System.out.println(num + " is a prime number.");
+	    else
+	      System.out.println(num + " is not a prime number.");
+	  }
 	}
 
-}
+
