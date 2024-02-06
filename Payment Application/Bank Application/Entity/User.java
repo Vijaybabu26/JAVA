@@ -1,6 +1,6 @@
-package bankapp.req;
+package bankapp.entity;
 
-public class User {
+public class User extends Object{
 	private String firstName;
 	private String lastName;
 	private long phoneNo;
@@ -52,7 +52,8 @@ public class User {
 		this.passWord = passWord;
 	}
 	//Payment Account
-	//Bank Account 	
-
-
+	public String toString() {
+		return this.userId+":"+ this.firstName +":"+ this.lastName + ":"+this.phoneNo+":"+this.DateOfBirth+":"+this.Address+":"+this.passWord;
+	}
+	
 }
