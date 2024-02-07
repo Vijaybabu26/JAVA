@@ -8,6 +8,7 @@ public class Runpaymentapp {
 	public static User[] userlist = new User[10];
 	public static void main(String[] args) {
 		int SelectedOption = 0;
+		int c = -1;
 		while(true) {
 			System.out.println("please select one Option");
 			System.out.println("1.Register");
@@ -54,11 +55,15 @@ public class Runpaymentapp {
 			String passWord = opt.next();
 			
 			User u = ops.douserregistration(fname, lname, SelectedOption, dob, address, SelectedOption, passWord);
-			userlist[0] = u;
-			for(int i=0;i<=userlist.length;i++) {
+			for(int i=0;i<userlist.length;i++) {
 				if(userlist[i]==null) {
-					userlist[i]=u;
+					c=i;
 				}
+				if(c!=-1) {
+					userlist[c] = u;
+				}
+				c++;
+				break;
 			}
 		}
 		else if(Optstr.equalsIgnoreCase("2")) {
@@ -66,6 +71,8 @@ public class Runpaymentapp {
 		}
 		else if(Optstr.equalsIgnoreCase("3")) {
 			
+		}else if(Optstr.equalsIgnoreCase("4")) {
+			ops.printUserlist(userlist);
 		}
 		else if(Optstr.equalsIgnoreCase("-1")) {
 			System.out.println("You Have Exit");
