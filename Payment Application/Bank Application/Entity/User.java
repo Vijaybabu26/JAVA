@@ -45,7 +45,7 @@ package Vijay.bank.apk.entity;
 			return userId;
 		}
 		public void setUserId() {
-			this.userId = ((int) Math.random()*1000+100);
+			this.userId = ((int) (Math.random()*1000+100));
 		}
 		public String getPassWord() {
 			return passWord;
