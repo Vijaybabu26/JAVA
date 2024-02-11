@@ -1,5 +1,9 @@
 package bankapp.apk;
 
+import java.util.List;
+
+import java.lang.Math;
+
 import bankapp.entity.User;
 
 public class Useroperations {
@@ -14,12 +18,32 @@ public class Useroperations {
 		u.setPassWord(passWord);
 		return u;
 	}
-	public void printUserlist(User[] users) {
-		for (int i = 0;i<users.length;i++) {
-			if(users[i]!=null) {
-				System.out.println("User Details Of"+users[i].getFirstName());
-				System.out.println(users[i]);
+	public void printUserlist(List<User> Users) {
+		for (int i = 0;i<Users.size();i++) {
+			if(Users.get(i)!=null) {
+				System.out.println("User Details Of"+Users.get(i).getFirstName());
+				System.out.println(Users.get(i));
 			}
+		}
+		
+	}
+	int i=0;
+	public boolean verifyuserid(String userId,String password,List<User> Users) {
+		if(String.valueOf(Users.get(i).equals(userId))!= null) {
+			if(password.equals(password)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public void Printcurruserdetails(int userId,List<User> Users) {
+		for (int i = 0;i<Users.size();i++) {
+			if(Users.get(i).getUserId() !=userId) {
+				System.out.println(userId);
+				break;
+			}
+			
+			
 		}
 		
 	}

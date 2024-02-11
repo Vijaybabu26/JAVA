@@ -7,7 +7,7 @@ public class User extends Object{
 	private String DateOfBirth;
 	private String Address;
 	private int userId;
-	private String passWord; 
+	private String passWord;
 	
 	public String getFirstName() {
 		return firstName;
@@ -43,7 +43,7 @@ public class User extends Object{
 		return userId;
 	}
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.userId = ((int) (Math.random()*1000+100));
 	}
 	public String getPassWord() {
 		return passWord;
@@ -54,6 +54,5 @@ public class User extends Object{
 	//Payment Account
 	public String toString() {
 		return this.userId+":"+ this.firstName +":"+ this.lastName + ":"+this.phoneNo+":"+this.DateOfBirth+":"+this.Address+":"+this.passWord;
-	}
-	
+	}	
 }
