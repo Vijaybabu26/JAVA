@@ -12,11 +12,14 @@ public class Anagram {
 			Arrays.sort(ch1);
 			Arrays.sort(ch2);
 			boolean b = Arrays.equals(ch1,ch2);
+			if(b) {
 			System.out.println(b + " The Given Strings are Anagram ");
+		}
 		}
 		else
 		{
-			System.out.println("the given strings length not equal");			
+			System.out.println(" the given strings length not equal");			
 		}
 	}
 }
+
