@@ -2,20 +2,27 @@ package bankapp.apk;
 
 import java.util.List;
 
-import java.lang.Math;
-
+import bankapp.entity.Bankaccount;
 import bankapp.entity.User;
 
 public class Useroperations {
-	public User douserregistration(String FName,String lName,long phoneNo,String dob,String address,int userId,String passWord) {
+	
+	List<User> users = null;
+	List<Bankaccount> Bankacctlist = null;
+	
+	public User douserregistration(String Fname,String Lname,long phoneNo,String dob,String passWord,String address)throws Exception {
 		User u = new User();
-		u.setFirstName(FName);
-		u.setLastName(lName);
+		u.setFirstName(Fname);
+		u.setLastName(Lname);
 		u.setPhoneNo(phoneNo);
 		u.setDateOfBirth(dob);
 		u.setAddress(address);
-		u.setUserId(userId);
 		u.setPassWord(passWord);
+		
+		if((Fname+Lname).length()>50) {
+			throw new Exception();
+		}
+		u.setUserId((int)(Math.random()*1000)+100);
 		return u;
 	}
 	public void printUserlist(List<User> Users) {
@@ -28,10 +35,12 @@ public class Useroperations {
 		
 	}
 	int i=0;
-	public boolean verifyuserid(String userId,String password,List<User> Users) {
-		if(String.valueOf(Users.get(i).equals(userId))!= null) {
-			if(password.equals(password)) {
+	public boolean verifyuserid(String userId,String password) {
+		for(int i=0;i<users.size();i++) {
+		if(String.valueOf(users.get(i).getUserId()).equals(userId)) {
+			if(password.equals(users.get(i).getPassWord())) {
 				return true;
+				}
 			}
 		}
 		return false;

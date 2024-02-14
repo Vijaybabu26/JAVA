@@ -1,112 +1,170 @@
-package Vijay.bank.apk;
+package bankapp.apk;
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
 
+import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
-import Vijay.bank.apk.entity.User;
+import bankapp.entity.User;
 
-	public class Runpaymentapp {
-		static int x = 0;
-	public static List<User> userlist;
-	public static List<Bankaccount> Bankacctlist;
-		public static void main(String[] args) {
-		int c=-1;	
-			int SelectedOption = 0;
+public class Runpaymentapp {
+	static int x = 0;
+	public static List<User> userlist = new ArrayList<User>();
+	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
+	public static int CurrUserId =-1;
+	
+	
+	public static void main(String[] args) {
+		int SelectedOption = 0;
+		Scanner opt = new Scanner(System.in); 
 		
-			while(true) {
-				System.out.println("please select one Option");
-				System.out.println("1.Register");
-				System.out.println("2.Login");
-				System.out.println("3.Add Bank Account");
-				System.out.println("4.List Of Users");
+		while(true) {
+			System.out.println("please select one Option");
+			System.out.println("1.Register New User");
+			System.out.println("2.Login");
+			System.out.println("3.Add Bank Account");
+			System.out.println("4.List Of Users");
 			System.out.println("5.Current User");
-				System.out.println("-1.Quit");
-				System.out.println("Choose atleast one Option");
-				Scanner opt = new Scanner(System.in); 
-				String Optstr = opt.next();	
-				System.out.println("User selected " + Optstr);
-			try {
-				SelectedOption = Integer.parseInt(Optstr);
-			}catch(NumberFormatException Ea){
-				Ea.printStackTrace();
-				Ea.getMessage();			
-			}catch(ArithmeticException Ex){
-				Ex.printStackTrace();
-				Ex.getMessage();
-				System.out.println("Some Errors has Occured in Athematic");
+			System.out.println("6. List of All User Bank Account");
+			System.out.println("-1.Quit / Log Out");
+			System.out.println("Choose an Option: ");
+			
+			String Optstr = opt.next();	
+			
+		try {
+			
+			SelectedOption = Integer.parseInt(Optstr);
+		
+			}catch(NumberFormatException e){
+				e.printStackTrace();
+				e.getMessage();	
+				System.out.println("Number Format Error. Please Choose Another Option.");
+			}catch(ArithmeticException e){
+				e.printStackTrace();
+				e.getMessage();
+				System.out.println("Arthemetic Error. Please Choose Another Option.");
 			}catch(Exception e){
 				e.printStackTrace();
 				e.getMessage();
-				System.out.println("Some Errors has Occured");
-		}
-//				finally {
-//				System.out.println("Finnally");
-//			}
+				System.out.println("Some Errors has Occured. Please Choose Another Option.");
+			}finally {
+				System.out.println();
+			}
+		
+			System.out.println("User selected " + Optstr);
 			
 			Useroperations ops = new Useroperations();
 			
-			if(Optstr.equalsIgnoreCase("1")){
-				System.out.println("Please provide user details as asked");
-				System.out.println("First Name:");
-				String fname = opt.next();
-				System.out.println("Last Name : ");
-				String lname = opt.next();
-				System.out.println("Phone No : ");
-				long phoneNo = Long.parseLong(opt.next());
-				System.out.println("Date Of Birth : ");
-				String dob = opt.next();
-				System.out.println("Address :");
-				String address = opt.next();
-				System.out.println("passWord : ");
-				String passWord = opt.next();
-				
-				User u = ops.douserregistration(fname, lname, SelectedOption, dob, address, SelectedOption, passWord);
-			for(int i=0;i<userlist.size();i++) {
-				if(userlist.get(i)==null) {
-					userlist.get(i).setUserId(i);
-					break;
-				}
-					
-					
-				}
-				
-			}
+		if(Optstr.equalsIgnoreCase("1")){
+			registerUser();
 		}
-			else if(Optstr.equalsIgnoreCase("2")) {
-			System.out.println("Login Your ID");
-			System.out.println("Enter UserId : ");
-			String Uid =opt.next();
-			System.out.println("Enter the Password : ");
-			String password = opt.next();
-			ops.verifyuserid(Uid, password, userlist);
-			if (ops.verifyuserid(Uid, password, userlist)) {
-				int curruserid = Integer.parseInt(Uid);
-				System.out.println("Login Success !");
-			}else {
-			System.out.println("Login Failed !");
-			}
-			}
-			else if(Optstr.equalsIgnoreCase("3")) {
-				
-			}
-			else if(Optstr.equalsIgnoreCase("4")) {
-				ops.printUserlist(userlist);
+		else if(Optstr.equalsIgnoreCase("2")) {
+			loginUser();
+		}
+		else if(Optstr.equalsIgnoreCase("3")) {
+			addBankAccount();
+			
+		}else if(Optstr.equalsIgnoreCase("4")) {
+			ops.printUserlist(userlist);
 		}else if(Optstr.equalsIgnoreCase("5")){
 			ops.Printcurruserdetails(0, userlist);
 		}else if(Optstr.equalsIgnoreCase("-1")) {
 		
-				System.out.println("You Have Exit");
-				break;
-				
+			System.out.println("You Have Exit");
+			break;
+			
+		}
+		}
+		
+//		if(str.equals("1")||str.equals("2")||str.equals("3")) {
+//			SelectedOption = Integer.parseInt(str);
+//		}else {
+//			System.out.print("Choose option in the range of 1 to 3");
+//		}		
+	}
+		public static void registerUser(){
+			Scanner opt = new Scanner(System.in); 
+			
+			Useroperations ops = new Useroperations();
+			System.out.println("Please provide user details as asked");
+			System.out.println("First Name:");
+			String fname = opt.next();
+			System.out.println("Last Name : ");
+			String lname = opt.next();
+			System.out.println("Phone Number : ");
+			Long phoneNo = Long.parseLong(opt.next());
+			System.out.println("Date Of Birth : ");
+			String dob = opt.next();
+			System.out.println("Address :");
+			String address = opt.next();
+			System.out.println("password : ");
+			String passWord = opt.next();
+			
+			User u;
+			
+			try {
+				u = ops.douserregistration(fname, lname, phoneNo, dob, passWord, address);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
+//			for(int i=0;i<userlist.size();i++) {
+//				if(userlist.get(i)==null) {
+//					userlist.get(i).setUserId(i);
+//					break;
+//				}
+//			}
+		}
+		public static boolean loginUser() {
+			Scanner opt = new Scanner(System.in); 
+			Useroperations ops = new Useroperations();
+			
+			System.out.println("Login Using UserID");
+			System.out.println("Enter UserId : ");
+			String Uid =opt.next();
+			System.out.println("Enter the Password : ");
+			String password = opt.next();
+			
+			if (ops.verifyuserid(Uid, password)) {
+				CurrUserId = Integer.parseInt(Uid);
+				return true;
+			}else {
+			System.out.println("Login Failed !");
+			return false;
+			}
+		}
+		public static void addBankAccount() {
+			Scanner opt = new Scanner(System.in);
+			System.out.println("Enter Bank Account Number: ");
+			String Bankacctnumber = opt.next(); 
+			System.out.println("Enter The Bank Name : ");
+			String BankacctBankName = opt.next();
+			System.out.println("Enter the Bank Account Pin : ");
+			String BankAcctPin = opt.next();
+			System.out.println("Enter the Bank IFSC Code:");
+			String BankAcctIFSC = opt.next();
+			System.out.println("Please Select the Account Type : ");
+			System.out.println("SA: SAVINGS");
+			System.out.println("CU: CURRENT");
+			System.out.println("LN: LOAN");
+			System.out.println("SL: SALARY");
+			
+			
+			Bankaccount ba = new Bankaccount();
+			ba.setBankacctnumber(Bankacctnumber);
+			ba.setBankacctBankName(BankacctBankName);
+			ba.setBankAcctPin(BankAcctPin);
+			ba.setBankAcctIFSC(BankAcctIFSC);
+			ba.setAcctype(Acctype.SAVINGS);
+			
+			
+			for(User u:userlist) {
+				if(u.getUserId() == CurrUserId) {
+					u.getBankacctlist().add(ba);
+				}
 			}
 			
-//			if(str.equals("1")||str.equals("2")||str.equals("3")) {
-//				SelectedOption = Integer.parseInt(str);
-//			}else {
-//				System.out.print("Choose option in the range of 1 to 3");
-//			}		
+			Bankacctlist.add(ba);
+			
 		}
-
-	}
-
+}
