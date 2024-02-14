@@ -1,8 +1,8 @@
 package bankapp.entity;
 
 public enum Acctype {
-	Savings,
-	Current,
-	Salary,
-	Loan	
+	SAVINGS,
+	CURRENT,
+	SALARY,
+	LOAN	
 }

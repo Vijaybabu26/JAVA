@@ -1,25 +1,24 @@
 package bankapp.entity;
 
-import java.util.List;
-
 public class Bankaccount {
-	private String Bankacctno;
-	private String BankacctName;
+	private String Bankacctnumber;
+	private String BankacctBankName;
 	private Acctype Acctype;
-	private String AcctIFSC;
-	private String Pin;
-	private List<Bankaccount> Bankacctlist;
-	public String getBankacctno() {
-		return Bankacctno;
+	private String BankAcctIFSC;
+	private String BankAcctPin;
+	
+	
+	public String getBankacctnumber() {
+		return Bankacctnumber;
 	}
-	public void setBankacctno(String bankacctno) {
-		Bankacctno = bankacctno;
+	public void setBankacctnumber(String bankacctnumber) {
+		Bankacctnumber = bankacctnumber;
 	}
-	public String getBankacctName() {
-		return BankacctName;
+	public String getBankacctBankName() {
+		return BankacctBankName;
 	}
-	public void setBankacctName(String bankacctName) {
-		BankacctName = bankacctName;
+	public void setBankacctBankName(String bankacctBankName) {
+		BankacctBankName = bankacctBankName;
 	}
 	public Acctype getAcctype() {
 		return Acctype;
@@ -27,17 +26,20 @@ public class Bankaccount {
 	public void setAcctype(Acctype acctype) {
 		Acctype = acctype;
 	}
-	public String getAcctIFSC() {
-		return AcctIFSC;
+	public String getBankAcctIFSC() {
+		return BankAcctIFSC;
 	}
-	public void setAcctIFSC(String acctIFSC) {
-		AcctIFSC = acctIFSC;
+	public void setBankAcctIFSC(String bankAcctIFSC) {
+		BankAcctIFSC = bankAcctIFSC;
 	}
-	public String getPin() {
-		return Pin;
+	public String getBankAcctPin() {
+		return BankAcctPin;
 	}
-	public void setPin(String pin) {
-		Pin = pin;
+	public void setBankAcctPin(String bankAcctPin) {
+		BankAcctPin = bankAcctPin;
 	}
 	
+	public String printBankAcctDetails() {
+		return "["+this.Bankacctnumber+","+this.BankacctBankName+","+this.BankAcctIFSC+","+this.BankAcctPin+","+this.Acctype+"]";		
+	}
 }
