@@ -57,31 +57,45 @@ public class Runpaymentapp {
 			Useroperations ops = new Useroperations();
 			
 		if(Optstr.equalsIgnoreCase("1")){
+			
 			registerUser();
+			
 		}
 		else if(Optstr.equalsIgnoreCase("2")) {
+			
 			loginUser();
+			
 		}
 		else if(Optstr.equalsIgnoreCase("3")) {
+			
+			if(ValidateCurrUser()) {
+				
 			addBankAccount();
 			
+			}
 		}else if(Optstr.equalsIgnoreCase("4")) {
+			
 			ops.printUserlist(userlist);
+			
 		}else if(Optstr.equalsIgnoreCase("5")){
-			ops.Printcurruserdetails(0, userlist);
+			
+			if(CurrUserId != -1) {
+			ops.Printcurruserdetails(CurrUserId);
+			}
+			
+		}else if(Optstr.equalsIgnoreCase("6")){
+
+			if(CurrUserId != -1) {
+					PrintUserBankaccountList();
+			}
+			
+			
 		}else if(Optstr.equalsIgnoreCase("-1")) {
-		
 			System.out.println("You Have Exit");
 			break;
 			
 		}
-		}
-		
-//		if(str.equals("1")||str.equals("2")||str.equals("3")) {
-//			SelectedOption = Integer.parseInt(str);
-//		}else {
-//			System.out.print("Choose option in the range of 1 to 3");
-//		}		
+		}	
 	}
 		public static void registerUser(){
 			Scanner opt = new Scanner(System.in); 
@@ -166,5 +180,16 @@ public class Runpaymentapp {
 			
 			Bankacctlist.add(ba);
 			
+		}
+		public static boolean ValidateCurrUser() {
+			if(CurrUserId != -1) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+		public static PrintUserBankaccountList() {
+			UserOperations ops = new UserOperations();
+			Map<User,List<Bankaccount>> mapitems = ops;
 		}
 }

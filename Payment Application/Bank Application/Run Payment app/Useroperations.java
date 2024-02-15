@@ -46,14 +46,21 @@ public class Useroperations {
 		return false;
 	}
 	public void Printcurruserdetails(int userId,List<User> Users) {
-		for (int i = 0;i<Users.size();i++) {
-			if(Users.get(i).getUserId() !=userId) {
-				System.out.println(userId);
-				break;
+		for(User u : users) {
+			if(u.getUserId() == userId) {
+				System.out.println(u);
+			}else {
+				System.out.println("No User Has Been Logged In.");
 			}
-			
-			
-		}
+		}	
+		
+		/*
+		 * for (int i = 0;i<Users.size();i++) { if(Users.get(i).getUserId() !=userId) {
+		 * System.out.println(users.get(i)); break; }
+		 * 
+		 * 
+		 * }
+		 */
 		
 	}
 }
