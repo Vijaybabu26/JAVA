@@ -6,7 +6,7 @@ public class Bankaccount {
 	private Acctype Acctype;
 	private String BankAcctIFSC;
 	private String BankAcctPin;
-	
+	private int userId;
 	
 	public String getBankacctnumber() {
 		return Bankacctnumber;
@@ -42,4 +42,11 @@ public class Bankaccount {
 	public String printBankAcctDetails() {
 		return "["+this.Bankacctnumber+","+this.BankacctBankName+","+this.BankAcctIFSC+","+this.BankAcctPin+","+this.Acctype+"]";		
 	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	
 }
