@@ -2,6 +2,7 @@ package bankapp.apk;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import bankapp.entity.Acctype;
@@ -74,8 +75,13 @@ public class Runpaymentapp {
 			
 			}
 		}else if(Optstr.equalsIgnoreCase("4")) {
-			
+//			try {
 			ops.printUserlist(userlist);
+//			}catch(NullPointerException e) {
+//				e.printStackTrace();
+//				e.getMessage();	
+//				System.out.println("Null Format Error. Please Choose Another Option.");
+//			}
 			
 		}else if(Optstr.equalsIgnoreCase("5")){
 			
@@ -86,7 +92,7 @@ public class Runpaymentapp {
 		}else if(Optstr.equalsIgnoreCase("6")){
 
 			if(CurrUserId != -1) {
-					PrintUserBankaccountList();
+				PrintCurrUserBankaccountList();
 			}
 			
 			
@@ -188,8 +194,19 @@ public class Runpaymentapp {
 				return false;
 			}
 		}
-		public static PrintUserBankaccountList() {
-			UserOperations ops = new UserOperations();
-			Map<User,List<Bankaccount>> mapitems = ops;
+		public static void PrintCurrUserBankaccountList() {
+			Useroperations ops = new Useroperations();
+			Map<User,List<Bankaccount>> mapItems = ops.getUserBankAccount();
+			for(User u : mapItems.keySet()) {
+				List<Bankaccount> //baList = new ArrayList<BankAccount>();
+									baList = mapItems.get(u);
+				System.out.println(u);
+				if(baList != null) {
+					for(Bankaccount ba : baList) {
+						System.out.println("-->" + ba.printBankAcctDetails());
+					}
+				}
+			}
+			
 		}
 }

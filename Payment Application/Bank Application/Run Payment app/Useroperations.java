@@ -1,6 +1,8 @@
 package bankapp.apk;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import bankapp.entity.Bankaccount;
 import bankapp.entity.User;
@@ -9,6 +11,11 @@ public class Useroperations {
 	
 	List<User> users = null;
 	List<Bankaccount> Bankacctlist = null;
+	public Useroperations() {
+		users = Runpaymentapp.userlist;
+		Bankacctlist = Runpaymentapp.Bankacctlist;
+		
+	}
 	
 	public User douserregistration(String Fname,String Lname,long phoneNo,String dob,String passWord,String address)throws Exception {
 		User u = new User();
@@ -26,12 +33,20 @@ public class Useroperations {
 		return u;
 	}
 	public void printUserlist(List<User> Users) {
-		for (int i = 0;i<Users.size();i++) {
-			if(Users.get(i)!=null) {
-				System.out.println("User Details Of"+Users.get(i).getFirstName());
-				System.out.println(Users.get(i));
+		for(User u:users) {
+			if(users != null) {
+				System.out.println("User Details of "+ u.getFirstName());
+				System.out.println(u);
 			}
 		}
+			
+		
+		
+		/*
+		 * for (int i = 0;i<Users.size();i++) { if(Users.get(i)!=null) {
+		 * System.out.println("User Details Of"+Users.get(i).getFirstName());
+		 * System.out.println(Users.get(i)); } }
+		 */
 		
 	}
 	int i=0;
@@ -45,7 +60,7 @@ public class Useroperations {
 		}
 		return false;
 	}
-	public void Printcurruserdetails(int userId,List<User> Users) {
+	public void Printcurruserdetails(int userId) {
 		for(User u : users) {
 			if(u.getUserId() == userId) {
 				System.out.println(u);
@@ -62,5 +77,18 @@ public class Useroperations {
 		 * }
 		 */
 		
+	}
+	public Map<User,List<Bankaccount>> getUserBankAccount(){
+//		Map<User,BankAccount> userBankAcctMap = new HashMap<User,BankAccount>();
+		Map<User, List<Bankaccount>> userBankAcctMap = new HashMap<User, List<Bankaccount>>() ;
+		
+		for(User u : users) {
+			
+			if(users != null) {
+				
+				userBankAcctMap.put(u,u.getBankacctlist());
+			}
+		}
+		return userBankAcctMap;
 	}
 }
