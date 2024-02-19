@@ -11,6 +11,7 @@ public class Useroperations {
 	
 	List<User> users = null;
 	List<Bankaccount> Bankacctlist = null;
+	
 	public Useroperations() {
 		users = Runpaymentapp.userlist;
 		Bankacctlist = Runpaymentapp.Bankacctlist;
@@ -49,7 +50,7 @@ public class Useroperations {
 		 */
 		
 	}
-	int i=0;
+	
 	public boolean verifyuserid(String userId,String password) {
 		for(int i=0;i<users.size();i++) {
 		if(String.valueOf(users.get(i).getUserId()).equals(userId)) {
@@ -66,6 +67,7 @@ public class Useroperations {
 				System.out.println(u);
 			}else {
 				System.out.println("No User Has Been Logged In.");
+				break;
 			}
 		}	
 		

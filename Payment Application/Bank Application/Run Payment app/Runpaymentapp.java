@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
@@ -66,6 +67,7 @@ public class Runpaymentapp {
 			
 			loginUser();
 			
+			
 		}
 		else if(Optstr.equalsIgnoreCase("3")) {
 			
@@ -75,13 +77,8 @@ public class Runpaymentapp {
 			
 			}
 		}else if(Optstr.equalsIgnoreCase("4")) {
-//			try {
 			ops.printUserlist(userlist);
-//			}catch(NullPointerException e) {
-//				e.printStackTrace();
-//				e.getMessage();	
-//				System.out.println("Null Format Error. Please Choose Another Option.");
-//			}
+			
 			
 		}else if(Optstr.equalsIgnoreCase("5")){
 			
@@ -125,6 +122,8 @@ public class Runpaymentapp {
 			
 			try {
 				u = ops.douserregistration(fname, lname, phoneNo, dob, passWord, address);
+				userlist.add(u);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -147,6 +146,7 @@ public class Runpaymentapp {
 			
 			if (ops.verifyuserid(Uid, password)) {
 				CurrUserId = Integer.parseInt(Uid);
+				System.out.println("Login Successful");
 				return true;
 			}else {
 			System.out.println("Login Failed !");
@@ -168,14 +168,15 @@ public class Runpaymentapp {
 			System.out.println("CU: CURRENT");
 			System.out.println("LN: LOAN");
 			System.out.println("SL: SALARY");
-			
+//			String Acctype = opt.next();
 			
 			Bankaccount ba = new Bankaccount();
 			ba.setBankacctnumber(Bankacctnumber);
 			ba.setBankacctBankName(BankacctBankName);
 			ba.setBankAcctPin(BankAcctPin);
 			ba.setBankAcctIFSC(BankAcctIFSC);
-			ba.setAcctype(Acctype.SAVINGS);
+			ba.setAcctype(Acctype.SALARY);
+			ba.setUserId(CurrUserId);
 			
 			
 			for(User u:userlist) {
@@ -198,8 +199,7 @@ public class Runpaymentapp {
 			Useroperations ops = new Useroperations();
 			Map<User,List<Bankaccount>> mapItems = ops.getUserBankAccount();
 			for(User u : mapItems.keySet()) {
-				List<Bankaccount> //baList = new ArrayList<BankAccount>();
-									baList = mapItems.get(u);
+				List<Bankaccount> baList = mapItems.get(u);
 				System.out.println(u);
 				if(baList != null) {
 					for(Bankaccount ba : baList) {
