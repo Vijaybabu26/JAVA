@@ -9,8 +9,9 @@ import java.util.Set;
 import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
 import bankapp.entity.User;
+import bankapp.entity.Wallet;
 
-public class Runpaymentapp {
+public class Runpaymentapp extends WalletOps {
 	static int x = 0;
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
@@ -29,6 +30,8 @@ public class Runpaymentapp {
 			System.out.println("4.List Of Users");
 			System.out.println("5.Current User");
 			System.out.println("6. List of All User Bank Account");
+			System.out.println("7.Add Money To Wallet");
+			System.out.println("8.Delete Bank Account");
 			System.out.println("-1.Quit / Log Out");
 			System.out.println("Choose an Option: ");
 			
@@ -93,7 +96,16 @@ public class Runpaymentapp {
 			}
 			
 			
-		}else if(Optstr.equalsIgnoreCase("-1")) {
+		}else if(Optstr.equalsIgnoreCase("7")) {
+			if(CurrUserId != -1) {
+				Wallettxn(CurrUserId);
+			}
+		}else if(Optstr.equalsIgnoreCase("8")) {
+			if(CurrUserId != -1) {
+				
+			}
+		}
+		else if(Optstr.equalsIgnoreCase("-1")) {
 			System.out.println("You Have Exit");
 			break;
 			
@@ -207,6 +219,27 @@ public class Runpaymentapp {
 					}
 				}
 			}
+			
+		}
+		public static void Wallettxn(int UserId) {
+			Scanner sc = new Scanner(System.in);
+			Wallet w = new Wallet();
+			w.setUserId(CurrUserId);
+			
+			int Amount =0;
+			
+			
+			if(UserId == w.getUserId()) {
+				System.out.println("Enter Amount To Add Wallet :");
+				Amount = sc.nextInt();
+//				amount = amount + w.getDefaultBal();
+				int FinalBal = Addmoney(Amount);
+				System.out.println("Available Balance Of Your Wallet"+FinalBal);
+			}else {
+				System.out.println("No User Has Been Logged In");
+			}
+	}
+		public static void DelBankAcc() {
 			
 		}
 }
