@@ -31,6 +31,8 @@ public class Useroperations {
 			throw new Exception();
 		}
 		u.setUserId((int)(Math.random()*1000)+100);
+		Fileops fo = new Fileops();
+		fo.WriteUsertofile(u);
 		return u;
 	}
 	public void printUserlist(List<User> Users) {
