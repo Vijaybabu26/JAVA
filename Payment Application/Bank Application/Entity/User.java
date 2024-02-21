@@ -86,6 +86,11 @@ public class User extends Object{
 		return this.userId + ":" + this.firstName + ":" + this.lastName+":"+ this.phoneNo+":"+this.DateOfBirth+":"+this.Address+":"+this.passWord;
 		
 	}
+	public String UserToFile() {
+		return this.userId + "," + this.firstName + "," + this.lastName+","+ this.phoneNo+","+this.DateOfBirth+","+this.Address+","+this.passWord+"\n";
+		
+	}
+	
 
 	
 }
