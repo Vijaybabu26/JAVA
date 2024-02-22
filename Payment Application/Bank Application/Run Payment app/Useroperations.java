@@ -64,14 +64,15 @@ public class Useroperations {
 		return false;
 	}
 	public void Printcurruserdetails(int userId) {
+		
 		for(User u : users) {
 			if(u.getUserId() == userId) {
-				System.out.println(u);
-			}else {
-				System.out.println("No User Has Been Logged In.");
-				break;
+				System.out.println(u.getFirstName()+ " " +u.getLastName()+ " " + u.getUserId());
+			}else if(Runpaymentapp.CurrUserId==-1) {
+				System.out.println("No User Has Logged In.");
 			}
 		}	
+		
 		
 		/*
 		 * for (int i = 0;i<Users.size();i++) { if(Users.get(i).getUserId() !=userId) {

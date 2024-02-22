@@ -32,6 +32,7 @@ public class Runpaymentapp extends WalletOps {
 			System.out.println("6. List of All User Bank Account");
 			System.out.println("7.Add Money To Wallet");
 			System.out.println("8.Delete Bank Account");
+			System.out.println("9.To Log Out The User");
 			System.out.println("-1.Quit / Log Out");
 			System.out.println("Choose an Option: ");
 			
@@ -102,10 +103,13 @@ public class Runpaymentapp extends WalletOps {
 			}
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
-				
+				DelBankAcc();
 			}
-		}
-		else if(Optstr.equalsIgnoreCase("-1")) {
+		}else if(Optstr.equalsIgnoreCase("9")) {
+			if(CurrUserId != -1) {
+				logout();
+			}
+		}else if(Optstr.equalsIgnoreCase("-1")) {
 			System.out.println("You Have Exit");
 			break;
 			
@@ -226,20 +230,29 @@ public class Runpaymentapp extends WalletOps {
 			Wallet w = new Wallet();
 			w.setUserId(CurrUserId);
 			
-			int Amount =0;
+			double Amount =0;
 			
 			
 			if(UserId == w.getUserId()) {
 				System.out.println("Enter Amount To Add Wallet :");
 				Amount = sc.nextInt();
 //				amount = amount + w.getDefaultBal();
-				int FinalBal = Addmoney(Amount);
-				System.out.println("Available Balance Of Your Wallet"+FinalBal);
+				double FinalBal = Addmoney(Amount);
+				System.out.println("Available Balance Of Your Wallet : "+FinalBal);
 			}else {
 				System.out.println("No User Has Been Logged In");
 			}
 	}
 		public static void DelBankAcc() {
+			Scanner db = new Scanner(System.in);
 			
+			System.out.println("Enter Your Bank Account Number : ");
+			String AccBankNum = db.next();
+			for(Bankaccount ba : Bankacctlist) {
+			
+			
+		}
+		public static void logout() {
+			CurrUserId = -1;
 		}
 }
