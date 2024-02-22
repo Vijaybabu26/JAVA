@@ -11,6 +11,7 @@ public class User extends Object{
 	private String Address;
 	private int userId;
 	private String passWord;
+	private double Balance;
 	
 	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	
@@ -89,6 +90,14 @@ public class User extends Object{
 	public String UserToFile() {
 		return this.userId + "," + this.firstName + "," + this.lastName+","+ this.phoneNo+","+this.DateOfBirth+","+this.Address+","+this.passWord+"\n";
 		
+	}
+
+	public double getBalance() {
+		return Balance;
+	}
+
+	public void setBalance(double balance) {
+		Balance = balance;
 	}
 	
 
