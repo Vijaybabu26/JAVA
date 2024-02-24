@@ -1,4 +1,5 @@
 package bankapp.apk;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -19,6 +20,15 @@ public class Runpaymentapp {
 	
 	
 	public static void main(String[] args) {
+		Fileops fileOps = new Fileops();
+		 try {
+			List<User> userData = fileOps.fileToUser();
+			for(User u : userData) {
+				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+	}
 		int SelectedOption = 0;
 		Scanner opt = new Scanner(System.in); 
 		

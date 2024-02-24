@@ -13,7 +13,7 @@ import bankapp.entity.User;
 public class Fileops {
 	public final String Userfilepath = "C:\\Users\\vijay\\Downloads\\Bank Application\\User_Details.csv";
 	public void WriteUsertofile(User u) throws IOException {
-		File userfile = new File("C:\\Users\\vijay\\Downloads\\Bank Application\\User_Details.csv");
+		File userfile = new File(Userfilepath);
 		FileWriter Uf = new FileWriter(userfile,true);
 		Uf.write(u.UserToFile());
 		
