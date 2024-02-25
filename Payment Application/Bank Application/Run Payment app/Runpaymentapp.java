@@ -117,7 +117,7 @@ public class Runpaymentapp {
 			}
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
-				
+				DelBankAcc();
 			}
 		}else if(Optstr.equalsIgnoreCase("9")) {
 			if(CurrUserId != -1) {
@@ -249,45 +249,46 @@ public class Runpaymentapp {
 			
 		}
 		public static void addWallet(int UserId) {
+
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
 			Wallet w = new Wallet();
 			w.setWalletlimit(10000);
-			if(amount <= 1000) {				
-				Wallet.setBalance(Wallet.getBalance()+amount);
-				if(Wallet.getBalance()> w.getWalletlimit()) {
-					System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
-					Wallet.setBalance(Wallet.getBalance()-amount);
-				}
-				System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
-			}else {
-				System.out.println("Maximum Amount Deposit Limit is 1000");
+						if(amount <= 1000) {				
+						Wallet.setBalance(Wallet.getBalance()+amount);
+						if(Wallet.getBalance()> w.getWalletlimit()) {
+							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
+							Wallet.setBalance(Wallet.getBalance()-amount);
+						}
+						System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
+					}else {
+						System.out.println("Maximum Amount Deposit Limit is 1000");
+					
+					}
 			}
-		}
+			
 
 		public static void DelBankAcc() {
 			
 			  Scanner opt = new Scanner(System.in);
-
+			  Bankaccount ba = new Bankaccount();
 			    System.out.println("Enter Bank Account Number: ");
 			    String accnum = opt.next();
-			    
-			    
 			    boolean acctFound = false;
+			    for (int i = 0; i < Bankacctlist.size(); i++) {
+		            if(String.valueOf(Bankacctlist.get(i).getBankacctnumber()).equals(accnum)) {
+		            	if(ba.getBankacctnumber().equals(Bankacctlist.get(i).getBankacctnumber())) {
+		            		acctFound = true;
+		            		Bankacctlist.remove(i);
+		            		System.out.println("Deleted"+ba.getBankacctnumber());
+		            	}
+		            }
+		            
+		        }
 			    
-			    for (Bankaccount acct : Bankacctlist) {
-			        if (acct.getBankacctnumber().equals(accnum)) {
-			            Bankacctlist.remove(acct);
-			            acctFound = true;
-			            System.out.println("Bank account deleted successfully.");
-//			            break; 
-			        }if (!acctFound) {
-			        	
-				        System.out.println("Account not found.");
-				    }
-			    }
-			    
+
+		
 		}
 		public static void logout() {
 			CurrUserId = -1;
