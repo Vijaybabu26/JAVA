@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
 import bankapp.entity.User;
@@ -20,15 +22,15 @@ public class Runpaymentapp {
 	
 	
 	public static void main(String[] args) {
-		Fileops fileOps = new Fileops();
-		 try {
-			List<User> userData = fileOps.fileToUser();
-			for(User u : userData) {
-				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-	}
+//		Fileops fileOps = new Fileops();
+//		 try {
+//			List<User> userData = fileOps.fileToUser();
+//			for(User u : userData) {
+//				System.out.println(u.getUserId()+" "+u.getFirstName()+" "+u.getLastName()+" "+u.getPhoneNo()+" "+u.getDateOfBirth()+" "+u.getAddress());
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//	}
 		int SelectedOption = 0;
 		Scanner opt = new Scanner(System.in); 
 		
@@ -40,9 +42,12 @@ public class Runpaymentapp {
 			System.out.println("4.List Of Users");
 			System.out.println("5.Current User");
 			System.out.println("6. List of All User Bank Account");
-			System.out.println("7.Add Money To Wallet");
-			System.out.println("8.Delete Bank Account");
-			System.out.println("9.To Log Out The User");
+			System.out.println("7.Add Money To Wallet(self)");
+			System.out.println("8.Send Money To Other User(DEPOSIT)");
+			System.out.println("9.User Can Withdraw The Money(WITHDRAW)");
+			System.out.println("10.Mini Statement of transaction");
+			System.out.println("11.Delete Bank Account");
+			System.out.println("12.To Log Out The User");
 			System.out.println("-1.Quit / Exit From Command");
 			System.out.println("Choose an Option: ");
 			
@@ -111,15 +116,30 @@ public class Runpaymentapp {
 			
 		}else if(Optstr.equalsIgnoreCase("7")) {
 			if(CurrUserId != -1) {
+				
 				addWallet(CurrUserId);
+				
 			}else {
 			System.out.println("User Must Log In to Add Money to wallet");
 			}
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
-				DelBankAcc();
+				
 			}
 		}else if(Optstr.equalsIgnoreCase("9")) {
+			if(CurrUserId != -1) {
+				
+			}
+		}else if(Optstr.equalsIgnoreCase("10")) {
+			if(CurrUserId != -1) {
+				
+			}
+		}
+		else if(Optstr.equalsIgnoreCase("11")) {
+			if(CurrUserId != -1) {
+				DelBankAcc();
+			}
+		}else if(Optstr.equalsIgnoreCase("12")) {
 			if(CurrUserId != -1) {
 				logout();
 		}else if(Optstr.equalsIgnoreCase("-1")) {
@@ -253,7 +273,15 @@ public class Runpaymentapp {
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
+			
+//			User u = userlist.get(UserId);
+////			if(u==null) {
+////				System.out.println("User not Fount");
+////				return;
+////			}
+			
 			Wallet w = new Wallet();
+//			if(CurrUserId == u.getUserId()) {
 			w.setWalletlimit(10000);
 						if(amount <= 1000) {				
 						Wallet.setBalance(Wallet.getBalance()+amount);
@@ -262,11 +290,13 @@ public class Runpaymentapp {
 							Wallet.setBalance(Wallet.getBalance()-amount);
 						}
 						System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
+	
 					}else {
 						System.out.println("Maximum Amount Deposit Limit is 1000");
 					
 					}
-			}
+				}
+//			}
 			
 
 		public static void DelBankAcc() {
@@ -275,17 +305,32 @@ public class Runpaymentapp {
 			  Bankaccount ba = new Bankaccount();
 			    System.out.println("Enter Bank Account Number: ");
 			    String accnum = opt.next();
-			    boolean acctFound = false;
-			    for (int i = 0; i < Bankacctlist.size(); i++) {
-		            if(String.valueOf(Bankacctlist.get(i).getBankacctnumber()).equals(accnum)) {
-		            	if(ba.getBankacctnumber().equals(Bankacctlist.get(i).getBankacctnumber())) {
-		            		acctFound = true;
-		            		Bankacctlist.remove(i);
-		            		System.out.println("Deleted"+ba.getBankacctnumber());
-		            	}
-		            }
-		            
-		        }
+			    for(User u : userlist) {
+			    	if(u.getUserId() == CurrUserId) {
+			    		java.util.Iterator<Bankaccount> iterator = Bankacctlist.iterator();
+			            while (iterator.hasNext()) {
+			                Bankaccount ub = iterator.next();
+			                if(ub.getBankacctnumber().equals(accnum)) {
+			                    iterator.remove();
+			                    System.out.println("Deleted " + ub.getBankacctnumber());
+			                    break;
+			                }
+			            }
+			    	}
+			    }
+			    
+			    
+//			    boolean acctFound = false;
+//			    for (int i = 0; i < Bankacctlist.size(); i++) {
+//		            if(String.valueOf(Bankacctlist.get(i).getBankacctnumber()).equals(accnum)) {
+//		            	if(ba.getBankacctnumber().equals(Bankacctlist.get(i).getBankacctnumber())) {
+//		            		acctFound = true;
+//		            		Bankacctlist.remove(i);
+//		            		System.out.println("Deleted"+ba.getBankacctnumber());
+//		            	}
+//		            }
+//		            
+//		        }
 			    
 
 		
