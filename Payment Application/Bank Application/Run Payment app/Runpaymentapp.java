@@ -1,7 +1,7 @@
 package bankapp.apk;
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -18,6 +18,7 @@ public class Runpaymentapp {
 	static int x = 0;
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
+	public static Map<Integer, Wallet> Walletlist = new HashMap<Integer , Wallet>();
 	public static int CurrUserId =-1;
 	
 	
@@ -96,6 +97,7 @@ public class Runpaymentapp {
 			
 			}
 		}else if(Optstr.equalsIgnoreCase("4")) {
+			
 			ops.printUserlist(userlist);
 			
 			
@@ -111,20 +113,22 @@ public class Runpaymentapp {
 
 			if(CurrUserId != -1) {
 				PrintCurrUserBankaccountList();
+			}else {
+				System.out.println("Please Login to show bank accounts");
 			}
 			
 			
 		}else if(Optstr.equalsIgnoreCase("7")) {
 			if(CurrUserId != -1) {
 				
-				addWallet(CurrUserId);
+				addWallet();
 				
 			}else {
 			System.out.println("User Must Log In to Add Money to wallet");
 			}
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
-				
+				System.out.println(ops.checkWalletBalance());
 			}
 		}else if(Optstr.equalsIgnoreCase("9")) {
 			if(CurrUserId != -1) {
@@ -268,31 +272,26 @@ public class Runpaymentapp {
 			}
 			
 		}
-		public static void addWallet(int UserId) {
+		public static void addWallet() {
 
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
 			
-//			User u = userlist.get(UserId);
-////			if(u==null) {
-////				System.out.println("User not Fount");
-////				return;
-////			}
-			
-			Wallet w = new Wallet();
-//			if(CurrUserId == u.getUserId()) {
-			w.setWalletlimit(10000);
-						if(amount <= 1000) {				
-						Wallet.setBalance(Wallet.getBalance()+amount);
-						if(Wallet.getBalance()> w.getWalletlimit()) {
-							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
-							Wallet.setBalance(Wallet.getBalance()-amount);
-						}
-						System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
-	
+//		
+//			w.setWalletlimit(10000);
+						if(amount <= 10000.00) {
+							Useroperations ops = new Useroperations();
+							ops.addMoneytoWallet(amount);
+//						Wallet.setBalance(Wallet.getBalance()+amount);
+//						if(Wallet.getBalance()> w.getWalletlimit()) {
+//							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
+//							Wallet.setBalance(Wallet.getBalance()-amount);
+//						}
+//						System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
+//	
 					}else {
-						System.out.println("Maximum Amount Deposit Limit is 1000");
+						System.out.println("Maximum Amount Deposit Limit is 10000");
 					
 					}
 				}
