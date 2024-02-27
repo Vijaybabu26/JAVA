@@ -1,8 +1,9 @@
 package bankapp.entity;
 
 public class Wallet {
-	private static  double Balance = 0;
-	private double Walletlimit;
+	private  double Balance;
+
+	//	private double Walletlimit;
 	private int userId;
 	
 	public int getUserId() {
@@ -11,17 +12,18 @@ public class Wallet {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public static double getBalance() {
+	public double getBalance() {
 		return Balance;
 	}
-	public static void setBalance(double balance) {
-		Balance = balance;
+	public void setBalance(double balance) {
+		this.Balance = balance;
 	}
-	public double getWalletlimit() {
-		return Walletlimit;
-	}
-	public void setWalletlimit(double walletlimit) {
-		Walletlimit = walletlimit;
-	}
-		
+	
+//	public double getWalletlimit() {
+//		return Walletlimit;
+//	}
+//	public void setWalletlimit(double walletlimit) {
+//		Walletlimit = walletlimit;
+//	}
+//		
 }
