@@ -1,4 +1,4 @@
-<h2 align="left">Hi 👋! My name is VIJAY BABU PONNADA and I'm a B.Sc Graduate>, from TUNI</h2>
+<h2 align="left">Hi 👋! My name is VIJAY BABU PONNADA and I'm a B.Sc (Computer Science)Graduate>, from TUNI</h2>
 
 ###
 
