@@ -9,18 +9,18 @@ import bankapp.entity.User;
 import bankapp.entity.Wallet;
 
 public class Useroperations {
-	List<User>List = Runpaymentapp.userlist;
-//	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
+	List<User>users = Runpaymentapp.userlist;
+	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
 	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
 	
-	List<User> users = null;
-	List<Bankaccount> Bankacctlist = null;
+//	List<User> users = null;
+//	List<Bankaccount> Bankacctlist = null;
 //	Map<Integer, Wallet> Walletlist = null;
-	public Useroperations() {
-		users = Runpaymentapp.userlist;
-		Bankacctlist = Runpaymentapp.Bankacctlist;
+//	public Useroperations() {
+//		users = Runpaymentapp.userlist;
+//		Bankacctlist = Runpaymentapp.Bankacctlist;
 //		Walletlist = Runpaymentapp.Walletlist;
-	}
+//	}
 	
 	public User douserregistration(String Fname,String Lname,long phoneNo,String dob,String passWord,String address)throws Exception {
 		User u = new User();
@@ -102,12 +102,12 @@ public class Useroperations {
 	public void addMoneytoWallet(double amount) {
 		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
 			Walletlist.get(Runpaymentapp.CurrUserId).setBalance(Walletlist.get(Runpaymentapp.CurrUserId).getBalance()+amount);
-			System.out.println(Walletlist.get(Runpaymentapp.CurrUserId).getBalance());
+			System.out.println("Your Current Balance in your wallet : "+Walletlist.get(Runpaymentapp.CurrUserId).getBalance());
 			
 		}
 	}
 	public double checkWalletBalance(){
-		
+		System.out.println("Your Current Balance in Your Wallet : ");
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
 	}
 }

@@ -1,4 +1,5 @@
 package bankapp.apk;
+import java.awt.desktop.UserSessionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,11 +45,12 @@ public class Runpaymentapp {
 			System.out.println("5.Current User");
 			System.out.println("6. List of All User Bank Account");
 			System.out.println("7.Add Money To Wallet(self)");
-			System.out.println("8.Send Money To Other User(DEPOSIT)");
-			System.out.println("9.User Can Withdraw The Money(WITHDRAW)");
-			System.out.println("10.Mini Statement of transaction");
-			System.out.println("11.Delete Bank Account");
-			System.out.println("12.To Log Out The User");
+			System.out.println("8.Check Balance in Wallet");
+			System.out.println("9.Send Money To Other User(DEPOSIT)");
+			System.out.println("10.User Can Withdraw The Money(WITHDRAW)");
+			System.out.println("11.Mini Statement of transaction");
+			System.out.println("12.Delete Bank Account");
+			System.out.println("13.To Log Out The User");
 			System.out.println("-1.Quit / Exit From Command");
 			System.out.println("Choose an Option: ");
 			
@@ -129,6 +131,8 @@ public class Runpaymentapp {
 		}else if(Optstr.equalsIgnoreCase("8")) {
 			if(CurrUserId != -1) {
 				System.out.println(ops.checkWalletBalance());
+			}else {
+				System.out.println("Please Log in to Check Balance In Wallet");
 			}
 		}else if(Optstr.equalsIgnoreCase("9")) {
 			if(CurrUserId != -1) {
@@ -138,12 +142,21 @@ public class Runpaymentapp {
 			if(CurrUserId != -1) {
 				
 			}
-		}
-		else if(Optstr.equalsIgnoreCase("11")) {
+		}else if(Optstr.equalsIgnoreCase("11")) {
 			if(CurrUserId != -1) {
-				DelBankAcc();
+				
 			}
 		}else if(Optstr.equalsIgnoreCase("12")) {
+			if(CurrUserId != -1) {
+				 Scanner ot = new Scanner(System.in);
+				  Bankaccount ba = new Bankaccount();
+				    System.out.println("Enter Bank Account Number: ");
+				    String accnum = opt.next();
+				DelBankAcc(CurrUserId,accnum);
+			}else {
+				System.out.println("please login to delete the bankaccount");
+			}
+		}else if(Optstr.equalsIgnoreCase("13")) {
 			if(CurrUserId != -1) {
 				logout();
 		}else if(Optstr.equalsIgnoreCase("-1")) {
@@ -172,7 +185,7 @@ public class Runpaymentapp {
 			System.out.println("password : ");
 			String passWord = opt.next();
 			
-			User u;
+			User u = null;
 			
 			try {
 				u = ops.douserregistration(fname, lname, phoneNo, dob, passWord, address);
@@ -181,6 +194,10 @@ public class Runpaymentapp {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			Wallet w = new Wallet();
+			int UserId = u.getUserId();
+			Walletlist.put(UserId, w);
+			
 
 		}
 		public static boolean loginUser() {
@@ -216,10 +233,10 @@ public class Runpaymentapp {
 			System.out.println("Enter the Bank IFSC Code:");
 			String BankAcctIFSC = opt.next();
 			System.out.println("Please Select the Following Account Type : ");
-//			System.out.println("SA: SAVINGS");
-//			System.out.println("CU: CURRENT");
-//			System.out.println("LN: LOAN");
-//			System.out.println("SL: SALARY");
+			System.out.println("SA: SAVINGS");
+			System.out.println("CU: CURRENT");
+			System.out.println("LN: LOAN");
+			System.out.println("SL: SALARY");
 			for(Acctype type : Acctype.values()) {
 				System.out.println(" "+ type);
 			}									//Account Type Enum Selection.
@@ -277,19 +294,15 @@ public class Runpaymentapp {
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
-			
-//		
-//			w.setWalletlimit(10000);
-						if(amount <= 10000.00) {
+			Wallet w = new Wallet();
+			w.setWalletlimit(10000);
+						if(amount <= 1000.00) {
 							Useroperations ops = new Useroperations();
 							ops.addMoneytoWallet(amount);
-//						Wallet.setBalance(Wallet.getBalance()+amount);
-//						if(Wallet.getBalance()> w.getWalletlimit()) {
-//							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
-//							Wallet.setBalance(Wallet.getBalance()-amount);
-//						}
-//						System.out.println("Your Current Balance In wallet : "+Wallet.getBalance());
-//	
+						if(w.getBalance()> w.getWalletlimit()) {
+							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
+							w.setBalance(w.getBalance()-amount);
+						}
 					}else {
 						System.out.println("Maximum Amount Deposit Limit is 10000");
 					
@@ -298,23 +311,22 @@ public class Runpaymentapp {
 //			}
 			
 
-		public static void DelBankAcc() {
+		public static void DelBankAcc(int UserId, String accnum) {
 			
-			  Scanner opt = new Scanner(System.in);
-			  Bankaccount ba = new Bankaccount();
-			    System.out.println("Enter Bank Account Number: ");
-			    String accnum = opt.next();
+			 
 			    for(User u : userlist) {
 			    	if(u.getUserId() == CurrUserId) {
-			    		java.util.Iterator<Bankaccount> iterator = Bankacctlist.iterator();
-			            while (iterator.hasNext()) {
-			                Bankaccount ub = iterator.next();
-			                if(ub.getBankacctnumber().equals(accnum)) {
-			                    iterator.remove();
-			                    System.out.println("Deleted " + ub.getBankacctnumber());
-			                    break;
-			                }
-			            }
+			    		List<Bankaccount> Bankacctlist = u.getBankacctlist();
+			            	for(Bankaccount acct : Bankacctlist) {
+			            		if(acct.getBankacctnumber().equals(accnum)) {
+			            			Bankacctlist.remove(accnum);
+			            			System.out.println("Bankaccount Deleted Successfully");
+			            			return;
+			            		}
+			            	}
+			    	}else {
+			    		System.out.println("Bank Account has not matched");
+			    		return;
 			    	}
 			    }
 			    
