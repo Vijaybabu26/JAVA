@@ -3,7 +3,7 @@ package bankapp.entity;
 public class Wallet {
 	private  double Balance;
 
-	//	private double Walletlimit;
+	private double Walletlimit;
 	private int userId;
 	
 	public int getUserId() {
@@ -19,11 +19,11 @@ public class Wallet {
 		this.Balance = balance;
 	}
 	
-//	public double getWalletlimit() {
-//		return Walletlimit;
-//	}
-//	public void setWalletlimit(double walletlimit) {
-//		Walletlimit = walletlimit;
-//	}
-//		
+	public double getWalletlimit() {
+		return Walletlimit;
+	}
+	public void setWalletlimit(double walletlimit) {
+		Walletlimit = walletlimit;
+	}
+		
 }

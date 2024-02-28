@@ -11,16 +11,7 @@ public class User extends Object{
 	private String Address;
 	private int userId;
 	private String passWord;
-//	private double Balance = 0.0;
-//	private List<User> userlist = new ArrayList<User>();
-//	public List<User> getUserlist() {
-//		return userlist;
-//	}
-//
-//	public void setUserlist(List<User> userlist) {
-//		this.userlist = userlist;
-//	}
-	
+
 	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	
 	public List<Bankaccount> getBankacctlist() {
@@ -100,14 +91,7 @@ public class User extends Object{
 		
 	}
 
-//	public double getBalance() {
-//		return Balance;
-//	}
-//
-//	public void setBalance(double balance) {
-//		Balance = balance;
-//	}
-	
+
 
 	
 }
