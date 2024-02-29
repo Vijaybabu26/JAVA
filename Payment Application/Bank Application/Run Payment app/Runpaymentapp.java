@@ -1,17 +1,13 @@
 package bankapp.apk;
-import java.awt.desktop.UserSessionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
+import bankapp.entity.Transaction;
 import bankapp.entity.User;
 import bankapp.entity.Wallet;
 
@@ -20,7 +16,9 @@ public class Runpaymentapp {
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	public static Map<Integer, Wallet> Walletlist = new HashMap<Integer , Wallet>();
+	public static Map<Integer,Transaction> Txnlist = new HashMap<Integer,Transaction>();
 	public static int CurrUserId =-1;
+
 	
 	
 	public static void main(String[] args) {
@@ -87,7 +85,14 @@ public class Runpaymentapp {
 		}
 		else if(Optstr.equalsIgnoreCase("2")) {
 			
-			loginUser();
+			
+			if(CurrUserId != -1) {
+			
+				System.out.println("please log out the current User ");
+			
+			}else {
+				loginUser();
+			}
 			
 			
 		}
@@ -136,7 +141,7 @@ public class Runpaymentapp {
 			}
 		}else if(Optstr.equalsIgnoreCase("9")) {
 			if(CurrUserId != -1) {
-				
+				ops.Dotransaction();
 			}
 		}else if(Optstr.equalsIgnoreCase("10")) {
 			if(CurrUserId != -1) {
@@ -151,8 +156,8 @@ public class Runpaymentapp {
 				 Scanner ot = new Scanner(System.in);
 				  Bankaccount ba = new Bankaccount();
 				    System.out.println("Enter Bank Account Number: ");
-				    String accnum = opt.next();
-				DelBankAcc(CurrUserId,accnum);
+				    long accnum = opt.nextLong();
+				DelBankAcc(CurrUserId,accnum, userlist);
 			}else {
 				System.out.println("please login to delete the bankaccount");
 			}
@@ -225,7 +230,7 @@ public class Runpaymentapp {
 			
 			Scanner opt = new Scanner(System.in);
 			System.out.println("Enter Bank Account Number: ");
-			String Bankacctnumber = opt.next(); 
+			long Bankacctnumber = opt.nextLong();
 			System.out.println("Enter The Bank Name : ");
 			String BankacctBankName = opt.next();
 			System.out.println("Enter the Bank Account Pin : ");
@@ -233,10 +238,10 @@ public class Runpaymentapp {
 			System.out.println("Enter the Bank IFSC Code:");
 			String BankAcctIFSC = opt.next();
 			System.out.println("Please Select the Following Account Type : ");
-			System.out.println("SA: SAVINGS");
-			System.out.println("CU: CURRENT");
-			System.out.println("LN: LOAN");
-			System.out.println("SL: SALARY");
+//			System.out.println("SA: SAVINGS");
+//			System.out.println("CU: CURRENT");
+//			System.out.println("LN: LOAN");
+//			System.out.println("SL: SALARY");
 			for(Acctype type : Acctype.values()) {
 				System.out.println(" "+ type);
 			}									//Account Type Enum Selection.
@@ -311,41 +316,27 @@ public class Runpaymentapp {
 //			}
 			
 
-		public static void DelBankAcc(int UserId, String accnum) {
-			
-			 
-			    for(User u : userlist) {
-			    	if(u.getUserId() == CurrUserId) {
-			    		List<Bankaccount> Bankacctlist = u.getBankacctlist();
-			            	for(Bankaccount acct : Bankacctlist) {
-			            		if(acct.getBankacctnumber().equals(accnum)) {
-			            			Bankacctlist.remove(accnum);
-			            			System.out.println("Bankaccount Deleted Successfully");
-			            			return;
-			            		}
-			            	}
-			    	}else {
-			    		System.out.println("Bank Account has not matched");
-			    		return;
-			    	}
-			    }
-			    
-			    
-//			    boolean acctFound = false;
-//			    for (int i = 0; i < Bankacctlist.size(); i++) {
-//		            if(String.valueOf(Bankacctlist.get(i).getBankacctnumber()).equals(accnum)) {
-//		            	if(ba.getBankacctnumber().equals(Bankacctlist.get(i).getBankacctnumber())) {
-//		            		acctFound = true;
-//		            		Bankacctlist.remove(i);
-//		            		System.out.println("Deleted"+ba.getBankacctnumber());
-//		            	}
-//		            }
-//		            
-//		        }
-			    
-
+		public static void DelBankAcc(int UserId, long accnum, List<User> userlist) {
+		    for(User u : userlist) {
+		        if(u.getUserId() == UserId) {
+		            List<Bankaccount> Bankacctlist = u.getBankacctlist();
+		            Iterator<Bankaccount> iterator = Bankacctlist.iterator();
+		            while(iterator.hasNext()) {
+		                Bankaccount acct = iterator.next();
+		                if(acct.getBankacctnumber()== accnum) {
+		                    iterator.remove();
+		                    System.out.println("Bankaccount Deleted Successfully");
+		                    return;
+		                }
+		            }
+		        }
+		    }
+		    System.out.println("Bank Account has not matched");
 		
+
 		}
+		
+		
 		public static void logout() {
 			CurrUserId = -1;
 			System.out.println("User has Log out");
