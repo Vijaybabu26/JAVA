@@ -1,7 +1,9 @@
 package bankapp.entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class User extends Object{
 	private String firstName;
@@ -14,6 +16,16 @@ public class User extends Object{
 
 	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	
+	private Map<Integer , Transaction> Txnlist = new HashMap<Integer, Transaction>();
+	
+	public Map<Integer, Transaction> getTxnlist() {
+		return Txnlist;
+	}
+
+	public void setTxnlist(Map<Integer, Transaction> txnlist) {
+		Txnlist = txnlist;
+	}
+
 	public List<Bankaccount> getBankacctlist() {
 		return Bankacctlist;
 	}
