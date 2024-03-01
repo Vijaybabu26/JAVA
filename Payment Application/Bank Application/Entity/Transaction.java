@@ -8,6 +8,15 @@ public class Transaction {
 	private long Srcnumber;
 	private Destination TxnDest;
 	private long Destnumber;
+//	private Wallet wal;
+
+//	public Wallet getWal() {
+//		return wal;
+//	}
+//
+//	public void setWal(Wallet wal) {
+//		this.wal = wal;
+//	}
 	public int getTxnId() {
 		return TxnId;
 	}

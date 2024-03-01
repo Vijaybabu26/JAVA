@@ -2,7 +2,7 @@ package bankapp.entity;
 
 public class Bankaccount {
 	private long Bankacctnumber;
-		private String BankacctBankName;
+	private String BankacctBankName;
 	private Acctype Acctype;
 	private String BankAcctIFSC;
 	private String BankAcctPin;

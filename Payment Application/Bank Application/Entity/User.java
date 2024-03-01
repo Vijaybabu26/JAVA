@@ -13,7 +13,14 @@ public class User extends Object{
 	private String Address;
 	private int userId;
 	private String passWord;
+	private Wallet wallet;
+	public Wallet getWallet() {
+		return wallet;
+	}
 
+	public void setWallet(Wallet wallet) {
+		this.wallet = wallet;
+	}
 	private List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	
 	private Map<Integer , Transaction> Txnlist = new HashMap<Integer, Transaction>();

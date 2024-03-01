@@ -1,10 +1,16 @@
 package bankapp.entity;
 
+import java.util.Map;
+
+import bankapp.apk.Runpaymentapp;
+
 public class Wallet {
 	private  double Balance;
 
 	private double Walletlimit;
 	private int userId;
+	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
+
 	
 	public int getUserId() {
 		return userId;
@@ -15,8 +21,9 @@ public class Wallet {
 	public double getBalance() {
 		return Balance;
 	}
-	public void setBalance(double balance) {
+	public double setBalance(double balance) {
 		this.Balance = balance;
+		return balance;
 	}
 	
 	public double getWalletlimit() {
