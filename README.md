@@ -34,8 +34,8 @@
 <div align="left">
   <img src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg" height="50" alt="youtube logo"  />
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" height="50" alt="instagram logo"  />
-  <img src="https://w7.pngwing.com/pngs/347/520/png-transparent-twitter-twitter-logo-twitter-app-social-media-app-media-3d-icon-thumbnail.png" height="60" alt="twitch logo"  />
-  <img src="https://www.videogameschronicle.com/files/2021/05/discord-new-logo.jpg" height="50" alt="discord logo"  />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" height="60" alt="twitch logo"  />
+  <img src="https://www.versionmuseum.com/images/applications/adobe-photoshop/adobe-photoshop%5E2019%5Ephotoshop-logo.jpg" height="50" alt="discord logo"  />
   <img src="https://1000logos.net/wp-content/uploads/2018/04/Gmail-logo-new.jpg" height="60" alt="gmail logo"  />
   <img src="https://logos-world.net/wp-content/uploads/2020/04/Linkedin-Logo.png" height="60" alt="linkedin logo"  />
 </div>
