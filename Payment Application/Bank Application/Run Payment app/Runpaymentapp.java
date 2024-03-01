@@ -300,20 +300,31 @@ public class Runpaymentapp {
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
 			Wallet w = new Wallet();
+//			Wallet w1 = Walletlist.getOrDefault(CurrUserId, w);
 			w.setWalletlimit(10000);
-						if(amount <= 1000.00) {
+						if(amount <= 10000.00) {
 							Useroperations ops = new Useroperations();
-							ops.addMoneytoWallet(amount);
+//							ops.addMoneytoWallet(amount);
+							
+							if(Walletlist.containsKey(CurrUserId)) {
+								
+								Walletlist.get(CurrUserId).setBalance(Walletlist.get(CurrUserId).getBalance()+amount);
+								
+								System.out.println("Your Current Balance in your wallet : "+ Walletlist.get(CurrUserId).getBalance());
+								
+							}
+						}
+		
+							
 						if(w.getBalance()> w.getWalletlimit()) {
 							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
 							w.setBalance(w.getBalance()-amount);
-						}
-					}else {
+						}else {
 						System.out.println("Maximum Amount Deposit Limit is 10000");
 					
 					}
-				}
-//			}
+}
+
 			
 
 		public static void DelBankAcc(int UserId, long accnum, List<User> userlist) {
@@ -332,8 +343,6 @@ public class Runpaymentapp {
 		        }
 		    }
 		    System.out.println("Bank Account has not matched");
-		
-
 		}
 		
 		

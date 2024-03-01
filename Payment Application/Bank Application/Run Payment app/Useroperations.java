@@ -92,13 +92,16 @@ public class Useroperations {
 		}
 		return userBankAcctMap;
 	}
-	public void addMoneytoWallet(double amount) {
-		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
-			Walletlist.get(Runpaymentapp.CurrUserId).setBalance(Walletlist.get(Runpaymentapp.CurrUserId).getBalance()+amount);
-			System.out.println("Your Current Balance in your wallet : "+Walletlist.get(Runpaymentapp.CurrUserId).getBalance());
-			
-		}
-	}
+//	public void addMoneytoWallet(double amount) {
+//		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
+//			
+//			Walletlist.get(Runpaymentapp.CurrUserId).setBalance(Walletlist.get(Runpaymentapp.CurrUserId).getBalance()+amount);
+//			
+//			System.out.println("Your Current Balance in your wallet : "+Walletlist.get(Runpaymentapp.CurrUserId).getBalance());
+//			
+//		}
+//	}
+	
 	public double checkWalletBalance(){
 		System.out.println("Your Current Balance in Your Wallet : ");
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
@@ -121,34 +124,47 @@ public class Useroperations {
 			System.out.println("Please Select the Correct Option");
 		}
 		if(txn.getTxnsrc()==Source.CASH){
-			System.out.println("Enter the Source Amount : ");
-			txn.setTxnamount(ty.nextDouble());
-			double amount = txn.getTxnamount();
-			System.out.println("Enter the Destination UserID To Send the money : ");
-			int Destuid = ty.nextInt();
-			for(User user : users) {
-				if(user.getUserId()==Destuid) {
-					w.setBalance(amount+ w.getBalance());
-					System.out.println("Amount Sent to "+ Destuid +" Successfull");
-				}else {
-					System.out.println("User Id Entered is Not Found");
-				}
-			}
+		
+		      System.out.println("Enter the Source Amount : ");
+		       txn.setTxnamount(ty.nextDouble());
+		        double amount = txn.getTxnamount();
+		        System.out.println("Enter the Destination UserID To Send the money : ");
+		        int Destuid = ty.nextInt();
+		        for(User user : users) {
+		            if(user.getUserId() == Destuid) {
+		            
+//		               Walletlist.put(Destuid, w.setBalance(amount + w.getBalance()));
+		            	
+		            	
+		            	
+		                System.out.println("Amount Sent to "+ Destuid +" Successfully");
+		                break;
+		            } else {
+		                System.out.println("User Id Entered is Not Found");
+		            }
+		        }
 					
 		}else if(txn.getTxnsrc()==Source.BANK){
-			System.out.println("Enter the Source Amount : ");
-			txn.setTxnamount(ty.nextDouble());
-			double amount = txn.getTxnamount();
-			System.out.println("Enter the Bank Account Number : ");
-			long DestAcctNo = ty.nextLong();
-			for(Bankaccount ba : Bank) {
-				if(ba.getBankacctnumber()== DestAcctNo) {
-					w.setBalance(amount+ w.getBalance());
-					System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfull");
-				}else {
-					System.out.println("Account Number Entered is Not Found");
-				}
-			}
+			
+			
+	        System.out.println("Enter the Source Amount : ");
+	        txn.setTxnamount(ty.nextDouble());
+	        double amount = txn.getTxnamount();
+	        System.out.println("Enter the Bank Account Number : ");
+	        long DestAcctNo = ty.nextLong();
+	        for(Bankaccount ba : Bank) {
+	            if(ba.getBankacctnumber() == DestAcctNo) {
+	            	
+	            	
+	            	
+	            	
+	                w.setBalance(amount + w.getBalance());
+	                System.out.println("Amount Sent to this Account Number "+ DestAcctNo +" Successfully");
+	            } else {
+	                System.out.println("Account Number Entered is Not Found");
+	            }
+	        }
+
 		}else if (txn.getTxnsrc()==Source.WALLET)  {
 			System.out.println("Enter the Source Amount : ");
 			txn.setTxnamount(ty.nextDouble());
@@ -158,11 +174,14 @@ public class Useroperations {
 				int Destuid1 = ty.nextInt();
 				for(User user : users) {
 					if(user.getUserId() == Destuid1) {
+						
+						
+						
 						w.setBalance(amount+ w.getBalance());
 						System.out.println("Amount Sent to "+ Destuid1 +" Successfull");
 					}
 				}
-			} else {
+			}else {
 				System.out.println("User Id Entered is Not Found");
 			}
 		}
