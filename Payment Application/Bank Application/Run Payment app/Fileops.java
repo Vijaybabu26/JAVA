@@ -11,7 +11,7 @@ import java.util.List;
 import bankapp.entity.User;
 
 public class Fileops {
-	public final String Userfilepath = "C:\\Users\\DT025\\Downloads\\Java8577\\Vijay by 8577\\JAVA\\User_Details.csv";
+	public final String Userfilepath = "C:\\Users\\vijay\\Downloads\\Bank Application\\User_Details.csv";
 	public void WriteUsertofile(User u) throws IOException {
 		File userfile = new File(Userfilepath);
 		FileWriter Uf = new FileWriter(userfile,true);

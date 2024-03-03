@@ -202,7 +202,7 @@ public class Runpaymentapp {
 			Wallet w = new Wallet();
 			int UserId = u.getUserId();
 			Walletlist.put(UserId, w);
-			
+		
 
 		}
 		public static boolean loginUser() {
@@ -300,29 +300,19 @@ public class Runpaymentapp {
 			System.out.println("Enter Amount to Add Wallet : ");
 			double amount = sc.nextDouble();
 			Wallet w = new Wallet();
-//			Wallet w1 = Walletlist.getOrDefault(CurrUserId, w);
+
 			w.setWalletlimit(10000);
 						if(amount <= 10000.00) {
 							Useroperations ops = new Useroperations();
-//							ops.addMoneytoWallet(amount);
-							
-							if(Walletlist.containsKey(CurrUserId)) {
-								
-								Walletlist.get(CurrUserId).setBalance(Walletlist.get(CurrUserId).getBalance()+amount);
-								
-								System.out.println("Your Current Balance in your wallet : "+ Walletlist.get(CurrUserId).getBalance());
-								
-							}
-						}
-		
-							
+							ops.addMoneytoWallet(amount);
 						if(w.getBalance()> w.getWalletlimit()) {
 							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
 							w.setBalance(w.getBalance()-amount);
 						}else {
 						System.out.println("Maximum Amount Deposit Limit is 10000");
 					
-					}
+						}
+			}
 }
 
 			
