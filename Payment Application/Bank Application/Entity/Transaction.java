@@ -1,43 +1,52 @@
 package bankapp.entity;
 
-import java.sql.Date;
+
+import java.time.LocalDate;
 
 public class Transaction {
-	private int TxnId;
-	private Date timestamp;
-	private double amount;
+	private String TxnId;
+	private LocalDate TransactionDate;
+	private double txnamount;
+	private Txn Transactiontype;
 	
+
+	
+
+
 	private Transactiontype Txnsrc;
 	private int UserId;
 	private Transactiontype TxnDest;
+	Wallet sourceWallet;
+	Wallet destinationWallet;
 	
-	public int getTxnId() {
+	
+	public String getTxnId() {
 		return TxnId;
 	}
 
 
-	public void setTxnId(int txnId) {
-		TxnId = txnId;
+	public void setTxnId(String txnId) {
+		TxnId =txnId;
 	}
 
 
-	public Date getTimestamp() {
-		return timestamp;
+	public LocalDate getTransactionDate() {
+		return TransactionDate;
 	}
 
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setTransactionDate(LocalDate transactionDate) {
+		TransactionDate = transactionDate;
 	}
 
 
-	public double getAmount() {
-		return amount;
+	public double getTxnamount() {
+		return txnamount;
 	}
 
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setTxnamount(double txnamount) {
+		this.txnamount = txnamount;
 	}
 
 
@@ -69,11 +78,40 @@ public class Transaction {
 	public void setTxnDest(Transactiontype txnDest) {
 		TxnDest = txnDest;
 	}
+
+
+	public Wallet getSourceWallet() {
+		return sourceWallet;
+	}
+
+
+	public void setSourceWallet(Wallet sourceWallet) {
+		this.sourceWallet = sourceWallet;
+	}
+
+
+	public Wallet getDestinationWallet() {
+		return destinationWallet;
+	}
+
+
+	public void setDestinationWallet(Wallet destinationWallet) {
+		this.destinationWallet = destinationWallet;
+	}
 	
+	public Txn getTransactiontype() {
+		return Transactiontype;
+	}
+
+
+	public void setTransactiontype(Txn transactiontype) {
+		Transactiontype = transactiontype;
+	}
+
 	@Override
 	public String toString() {
-		return "--->" +": Transaction ID " + TxnId + "Transaction date : " + timestamp 
-				+ "Transaction Amount: "+amount + "Transaction Source Type" + Txnsrc 
+		return "--->" +": Transaction ID " + TxnId + "Transaction date : " + TransactionDate 
+				+ "Transaction Amount: "+txnamount + "Transaction Source Type" + Txnsrc 
 				+" Amount sent to UserId "+ UserId + "Transaction Destination Type"
 				+ TxnDest ;
 	}
