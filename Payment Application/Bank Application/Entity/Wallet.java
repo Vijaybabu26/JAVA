@@ -5,7 +5,7 @@ import java.util.Map;
 import bankapp.apk.Runpaymentapp;
 
 public class Wallet {
-	private double Balance;
+	private  double Balance;
 
 	private double Walletlimit;
 	private int userId;

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class User{
+public class User extends Object{
 	private String firstName;
 	private String lastName;
 	private long phoneNo;

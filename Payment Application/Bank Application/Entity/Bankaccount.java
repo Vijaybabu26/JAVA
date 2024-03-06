@@ -14,6 +14,7 @@ public class Bankaccount {
 	public void setBankacctnumber(long bankacctnumber) {
 		Bankacctnumber = bankacctnumber;
 	}
+
 	public String getBankacctBankName() {
 		return BankacctBankName;
 	}
