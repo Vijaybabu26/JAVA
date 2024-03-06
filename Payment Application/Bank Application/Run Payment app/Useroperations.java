@@ -89,7 +89,6 @@ public class Useroperations {
 		for(User u : users) {
 			
 			if(users != null) {
-				
 				userBankAcctMap.put(u,u.getBankacctlist());
 			}
 		}
@@ -109,15 +108,24 @@ public class Useroperations {
 		System.out.println("Your Current Balance in Your Wallet : ");
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
 	}
-	public boolean Transaction(Wallet Sender, Wallet receiver, Txn tType, double amount) {
+	public double checkBankBalance() {
+		System.out.println("Your Current Balance in your Bank :");
+		return Bank.get(Runpaymentapp.CurrUserId ).getBankBal();
+	}
+	public boolean WTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
 		if(Sender.getBalance()>amount) {
-			receiver.setBalance(receiver.getBalance()+ amount);
+			Receiver.setBalance(Receiver.getBalance()+ amount);
 			Sender.setBalance(Sender.getBalance()-amount);
 			return true;	
 		}
 		return false;
-		
-		
+	}
+	public boolean CTransaction(Wallet Reciever, Txn tType, double amount) {
+		if(amount >= 0) {
+			Reciever.setBalance(Reciever.getBalance()+ amount);
+			return true;
+		}
+		return false;
 	}
 	
 	
