@@ -7,7 +7,15 @@ public class Bankaccount {
 	private String BankAcctIFSC;
 	private String BankAcctPin;
 	private int userId;
+	private double BankBal;
 	
+	public double getBankBal() {
+		return BankBal;
+	}
+	public double setBankBal(double bankBal) {
+		this.BankBal = bankBal;
+		return BankBal = bankBal;
+	}
 	public long getBankacctnumber() {
 		return Bankacctnumber;
 	}
@@ -41,7 +49,7 @@ public class Bankaccount {
 	}
 	
 	public String printBankAcctDetails() {
-		return "["+this.Bankacctnumber+","+this.BankacctBankName+","+this.BankAcctIFSC+","+this.BankAcctPin+","+this.Acctype+"]";		
+		return "["+this.Bankacctnumber+","+this.BankacctBankName+","+this.BankAcctIFSC+","+this.BankAcctPin+","+this.Acctype+ "," +this.BankBal+"]";		
 	}
 	public int getUserId() {
 		return userId;

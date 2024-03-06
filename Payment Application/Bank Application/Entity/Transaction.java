@@ -8,11 +8,6 @@ public class Transaction {
 	private LocalDate TransactionDate;
 	private double txnamount;
 	private Txn Transactiontype;
-	
-
-	
-
-
 	private Transactiontype Txnsrc;
 	private int UserId;
 	private Transactiontype TxnDest;
