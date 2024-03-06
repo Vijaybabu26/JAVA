@@ -109,7 +109,7 @@ public class Useroperations {
 		System.out.println("Your Current Balance in Your Wallet : ");
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
 	}
-	public boolean Transaction(Wallet Sender, Wallet receiver, T tType, double amount) {
+	public boolean Transaction(Wallet Sender, Wallet receiver, Txn tType, double amount) {
 		if(Sender.getBalance()>amount) {
 			receiver.setBalance(receiver.getBalance()+ amount);
 			Sender.setBalance(Sender.getBalance()-amount);

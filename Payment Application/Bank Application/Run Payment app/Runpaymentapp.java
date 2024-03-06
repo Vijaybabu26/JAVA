@@ -352,6 +352,7 @@ public class Runpaymentapp {
 			int i=1;
 			for (Txn tx : Txn.values()) {
 				System.out.println(i+ " " + tx);
+				i++;
 			}
 			System.out.println("Select The Option To Send or Withdraw : ");
 			int option = ty.nextInt();
@@ -359,7 +360,8 @@ public class Runpaymentapp {
 				 txn.setTransactiontype(Txn.Deposit);
 				 System.out.println("Select The Option to Send Money From Which Account: ");
 			for(Transactiontype s : Transactiontype.values()) {
-				System.out.println(i+" "+ s ); 			//for Txn Src Enum
+				System.out.println(" "+ s ); 			//for Txn Src Enum
+				
 			}
 			try {
 			String Src = ty.next();
@@ -413,37 +415,42 @@ public class Runpaymentapp {
 //		            } else {
 //		                System.out.println("Account Number Entered is Not Found");
 //		            }
-		        }
+		        }else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
+					Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
+					 txn.setSourceWallet(Source);
+					 System.out.println("Enter The Reciver UserId To Send : ");
+					 int Reciever = ty.nextInt();
+					 Wallet Destination = Walletlist.get(Reciever);
+					 txn.setDestinationWallet(Destination);
+					 System.out.println("Enter The Amount To Send :");
+					 double Txamount = ty.nextDouble() ;
+					 txn.setTransactionDate(date);
+					 txn.setTxnId(date.toString());
+					boolean res = ops.Transaction(Source,Destination,txn.getTransactiontype(),Txamount);
+					if(res== true) {
+					System.out.println("Transaction completed");
+					System.out.println("Your Current Balance : "+ w.getBalance());
+					}else
+					{
+						System.out.println("Transaction Failed");
+					}
+					//			if(w.getBalance()>= txnamount) {
+//							
+//							for(User user : users) {
+//								if(user.getUserId() == Destuid1) {
+//									
+//									
+//									
+//									w.setBalance(amount+ w.getBalance());
+//									System.out.println("Amount Sent to "+ Destuid1 +" Successfull");
+//								}
+//							}
+//						}else {
+//							System.out.println("User Id Entered is Not Found");
+//						}
+					}
 
 			}
-		else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
-			Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
-			 txn.setSourceWallet(Source);
-			 System.out.println("Enter The Reciver UserId To Send : ");
-			 int Reciever = ty.nextInt();
-			 Wallet Destination = Walletlist.get(Reciever);
-			 txn.setDestinationWallet(Destination);
-			 System.out.println("Enter The Amount To Send :");
-			 double Txamount = ty.nextDouble() ;
-			 txn.setTransactionDate(date);
-			 txn.setTxnId(date.toString());
-			boolean res = ops.Transaction(Source,Reciever,txn.getTransactiontype(),Txamount);
-			System.out.println("Transaction completed");
-			System.out.println("Your Current Balance : "+ w.getBalance());
-			//			if(w.getBalance()>= txnamount) {
-//					
-//					for(User user : users) {
-//						if(user.getUserId() == Destuid1) {
-//							
-//							
-//							
-//							w.setBalance(amount+ w.getBalance());
-//							System.out.println("Amount Sent to "+ Destuid1 +" Successfull");
-//						}
-//					}
-//				}else {
-//					System.out.println("User Id Entered is Not Found");
-//				}
-			}
+		
 		}
 }
