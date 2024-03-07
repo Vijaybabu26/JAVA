@@ -21,5 +21,4 @@ create table BankAccount(Bankacctno int NOT null , BankacctBankName varchar(25),
  drop table Transaction;
 create table Wallet(UserId int,foreign key(UserId) references user(UserId), Balance double);
  describe Wallet;
- 
  drop table Wallet;
