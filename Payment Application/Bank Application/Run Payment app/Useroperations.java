@@ -83,6 +83,11 @@ public class Useroperations {
 		
 		
 	}
+//	public void minitransaction(int UserId) {
+//		for(User u : users) {
+//			if(u)
+//		}
+//	}
 	public Map<User,List<Bankaccount>> getUserBankAccount(){
 		Map<User, List<Bankaccount>> userBankAcctMap = new HashMap<User, List<Bankaccount>>() ;
 		
@@ -109,8 +114,26 @@ public class Useroperations {
 		return Walletlist.get(Runpaymentapp.CurrUserId ).getBalance();
 	}
 	public double checkBankBalance() {
-		System.out.println("Your Current Balance in your Bank :");
-		return Bank.get(Runpaymentapp.CurrUserId ).getBankBal();
+		Scanner ops = new Scanner(System.in);
+		System.out.println("Enter The Account Numer To Check The Bank Balance : ");
+		long Accnum = ops.nextLong();
+		
+		for(User u : users) {
+	        List<Bankaccount> Bankacctlist = u.getBankacctlist();
+	        for(Bankaccount acct : Bankacctlist) {
+	            if(acct.getBankacctnumber() == Accnum) {
+	                System.out.println("Your Current Bank Balance is :  ");
+	                
+	                
+	                acct.getBankBal();
+	                System.out.println("Your Current Bank Balance is : " + acct.getBankBal());
+	                return acct.getBankBal();
+	            }
+	        }
+	    }
+		return Accnum;
+	
+		
 	}
 	public boolean WTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
 		if(Sender.getBalance()>amount) {
@@ -127,7 +150,15 @@ public class Useroperations {
 		}
 		return false;
 	}
-	
+	public boolean BTransaction(Bankaccount Sender, Bankaccount Reciever, Txn tType, double amount) {
+		if(Sender.getBankBal()>amount) {
+			Reciever.setBankBal(Reciever.getBankBal()+amount);
+			Sender.setBankBal(Sender.getBankBal()-amount);
+			return true;
+		}
+		return false;
+		
+	}
 	
 }
 
