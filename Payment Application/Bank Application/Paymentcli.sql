@@ -15,7 +15,11 @@ create table BankAccount(Bankacctno int NOT null , BankacctBankName varchar(25),
  describe BankAccount;
  drop table BankAccount;
  create table Transaction(TxnId varchar(30) not null,TxnDate Varchar (20),
- TxnAmount int, Txntype Varchar(20), TxnDestUserid int,UserId int,
+ TxnAmount double, Txntype Varchar(20), TxnDestUserid int,UserId int,
  foreign key(UserId) references user(UserId), Primary key(TxnId));
   describe Transaction;
  drop table Transaction;
+create table Wallet(UserId int,foreign key(UserId) references user(UserId), Balance double);
+ describe Wallet;
+ 
+ drop table Wallet;
