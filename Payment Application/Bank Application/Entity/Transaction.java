@@ -13,6 +13,28 @@ public class Transaction {
 	private Transactiontype TxnDest;
 	Wallet sourceWallet;
 	Wallet destinationWallet;
+	Bankaccount SourceBank;
+	
+	public Bankaccount getSourceBank() {
+		return SourceBank;
+	}
+
+
+	public void setSourceBank(Bankaccount sourceBank) {
+		SourceBank = sourceBank;
+	}
+
+
+	public Bankaccount getDestinationBank() {
+		return DestinationBank;
+	}
+
+
+	public void setDestinationBank(Bankaccount destinationBank) {
+		DestinationBank = destinationBank;
+	}
+
+	Bankaccount DestinationBank;
 	
 	
 	public String getTxnId() {
