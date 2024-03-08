@@ -448,26 +448,38 @@ public class Runpaymentapp {
 						}
 						
 			}else if(txn.getTxnsrc()==Transactiontype.BANK){
-					Bankaccount BankAcct = Bankacctlist.get(Runpaymentapp.CurrUserId);
-					txn.setSourceBank(BankAcct);
-					System.out.println("Enter the Bank Account Number to Send : ");
-					int Reciever = ty.nextInt();
-					Bankaccount Destination = Bankacctlist.get(Reciever);
-					txn.setDestinationBank(Destination);
-					
-					System.out.println("Enter Amount To Send To Bank : ");
-					double Txamount = ty.nextDouble();
-					txn.setTransactionDate(date);
-					txn.setTxnId(date.toString());
-					boolean res = ops.BTransaction(BankAcct, Destination, txn.getTransactiontype(), Txamount);
-					if(res== true) {
-						System.out.println("Transaction completed");
-						System.out.println("Your Current Balance : " + Destination.getBankBal());
-						
-							}else
-							{
-							System.out.println("Transaction Failed");
+//					Bankaccount BankAcct = Bankacctlist.get(Runpaymentapp.CurrUserId);
+					Bankaccount BankAcct = null;
+					 for(Bankaccount b : Bankacctlist) {
+						 if(b.getUserId()==CurrUserId) {
+							 BankAcct = b;
+						 }
+					 }
+						txn.setSourceBank(BankAcct);
+						System.out.println("Enter the Bank Account Number to Send : ");
+						int Reciever = ty.nextInt();
+						Bankaccount Destination = null;
+						for(Bankaccount ba : Bankacctlist) {
+							if(ba.getBankacctnumber() == Reciever) {
+								Destination = ba;
+								
 							}
+						}
+						txn.setDestinationBank(Destination);
+						
+						System.out.println("Enter Amount To Send To Bank : ");
+						double Txamount = ty.nextDouble();
+						txn.setTransactionDate(date);
+						txn.setTxnId(date.toString());
+						boolean res = ops.BTransaction(BankAcct, Destination, txn.getTransactiontype(), Txamount);
+						if(res== true) {
+							System.out.println("Transaction completed");
+							System.out.println("Your Current Balance : " + Destination.getBankBal());
+							
+								}else
+								{
+								System.out.println("Transaction Failed");
+								}
 					
 		       }else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
 					Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
