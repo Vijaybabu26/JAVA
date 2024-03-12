@@ -18,7 +18,7 @@ public class Useroperations {
 	List<User>users = Runpaymentapp.userlist;
 	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
 	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
-//	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
+	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
 	
 //	List<User> users = null;
 //	List<Bankaccount> Bankacctlist = null;
@@ -98,6 +98,15 @@ public class Useroperations {
 			}
 		}
 		return userBankAcctMap;
+	}
+	public Map<User,Map<Integer,Transaction>> getUserTransaction(){
+		Map<User,Map<Integer,Transaction>> UserTxn = new HashMap<User,Map<Integer,Transaction>>();
+		for(User u :users) {
+			if(users != null) {
+				UserTxn.put(u,u.getTxnlist());
+			}
+		}
+		return UserTxn;
 	}
 	public void addMoneytoWallet(double amount) {
 		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
