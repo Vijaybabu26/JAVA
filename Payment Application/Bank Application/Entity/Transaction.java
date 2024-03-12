@@ -132,5 +132,11 @@ public class Transaction {
 				+" Amount sent to UserId "+ UserId + "Transaction Destination Type"
 				+ TxnDest ;
 	}
-	
+//	public String PrintTxn(){
+//		return"--->" +": Transaction ID " + TxnId + "Transaction date : " + TransactionDate 
+//				+ "Transaction Amount: "+txnamount + "Transaction Source Type" + Txnsrc 
+//				+" Amount sent to UserId "+ UserId + "Transaction Destination Type"
+//				+ TxnDest;
+//
+//	}
 }
