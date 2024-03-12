@@ -48,7 +48,7 @@ public class Runpaymentapp {
 			System.out.println("7.Add Money To Wallet(self)");
 			System.out.println("8.Check Balance in Wallet");
 			System.out.println("9.Send Money To User(To Do A Transaction)");
-			System.out.println("10.");
+			System.out.println("10.///////////////////");
 			System.out.println("11.Mini Statement of transaction");
 			System.out.println("12.Delete Bank Account");
 			System.out.println("13.To Log Out The User");
@@ -156,7 +156,7 @@ public class Runpaymentapp {
 			}
 		}else if(Optstr.equalsIgnoreCase("11")) {
 			if(CurrUserId != -1) {
-				
+				PrintTransactionOfUser();
 			}
 		}else if(Optstr.equalsIgnoreCase("12")) {
 			if(CurrUserId != -1) {
@@ -212,7 +212,9 @@ public class Runpaymentapp {
 			
 			try {
 				u = ops.douserregistration(fname, lname, phoneNo, dob, passWord, address);
-				userlist.add(u);
+//				userlist.add(u);
+				PaymentCLIDAO db = new PaymentCLIDAO();
+				db.UserDb(u);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -312,11 +314,22 @@ public class Runpaymentapp {
 			
 		}
 		public static void PrintTransactionOfUser() {
-			Useroperations ops = new Useroperations();
-			Map<User,Map<Integer,Transaction>> mapItems = ops.getUserTransaction();
+//			Useroperations ops = new Useroperations();
+//			Transaction tx = new Transaction();
+//			Map<User,Map<Integer,Transaction>> mapItems = ops.getUserTransaction();
+//			for(User u : mapItems.keySet()) {
+//				Map<Integer, Transaction> txnList = mapItems.get(u);
+//				System.out.println(u);
+//				if(txnList != null) {
+//					for(Transaction txn : txnList.values()) {
+//						System.out.println("-->" + tx.toString());
+//					}
+//				}
+//			}
 		}
 			public static void addWallet() {
-
+				LocalDate date = LocalDate.now();
+				Transaction tx = new Transaction();
 			Scanner sc = new  Scanner(System.in);
 			System.out.println("Enter Amount to Add Wallet : ");
 	
@@ -330,6 +343,7 @@ public class Runpaymentapp {
 						if(w.getBalance()> w.getWalletlimit()) {
 							System.out.println("Wallet amount Exceeded. Wallet Limit is 10000.");
 							w.setBalance(w.getBalance()-amount);
+							
 						}else {
 						System.out.println("Maximum Amount Deposit Limit is 10000");
 					
@@ -373,7 +387,7 @@ public class Runpaymentapp {
 		                double amount = sc.nextDouble();
 		                double newBalance = acct.getBankBal() + amount;
 		                acct.setBankBal(newBalance);
-		                System.out.println("Amount Added Success. New Balance: " + acct.getBankBal());
+		                System.out.println("Amount Added Success. Available Balance: " + acct.getBankBal());
 		                return;
 		            }
 		        }
@@ -420,16 +434,16 @@ public class Runpaymentapp {
 			System.out.println("Select The Option To Send or Withdraw : ");
 			int option = ty.nextInt();
 				if(option == 1) {
-					 txn.setTransactiontype(Txn.Deposit);
+					 txn.setTransactiontype(Txn.Credit);
 					 System.out.println("Select The Option to Send Money From Which Account: ");
 				for(Transactiontype s : Transactiontype.values()) {
 					System.out.println(" "+ s ); 			//for Txn Src Enum
 					
 				}
 				try {
-				String Src = ty.next();
-				Transactiontype Srctype = Transactiontype.valueOf(Src.toUpperCase());
-				txn.setTxnsrc(Srctype);
+					String Src = ty.next();
+					Transactiontype Srctype = Transactiontype.valueOf(Src.toUpperCase());
+					txn.setTxnsrc(Srctype);
 				}catch(IllegalArgumentException e) {
 					e.printStackTrace();
 					System.out.println("Please Select the Correct Option");
@@ -481,9 +495,7 @@ public class Runpaymentapp {
 							if(res== true) {
 								System.out.println("Transaction completed");
 								System.out.println("Your Current Balance : " + Destination.getBankBal());
-								
-									}else
-									{
+									}else{
 									System.out.println("Transaction Failed");
 									}
 						

@@ -46,6 +46,7 @@ public class Useroperations {
 		fo.WriteUsertofile(u);
 		return u;
 	}
+	
 	public void printUserlist(List<User> Users) {
 		for(User u:Users) {
 			if(Users != null) {
@@ -100,13 +101,13 @@ public class Useroperations {
 		return userBankAcctMap;
 	}
 	public Map<User,Map<Integer,Transaction>> getUserTransaction(){
-		Map<User,Map<Integer,Transaction>> UserTxn = new HashMap<User,Map<Integer,Transaction>>();
-		for(User u :users) {
-			if(users != null) {
-				UserTxn.put(u,u.getTxnlist());
-			}
-		}
-		return UserTxn;
+//		Map<User,Map<Integer,Transaction>> UserTxn = new HashMap<User,Map<Integer,Transaction>>();
+//		for(Transaction u :Txnlist) {
+//			if(Txnlist != null) {
+//				UserTxn.put(u,u.getTxnlist());
+//			}
+//		}
+//		return UserTxn;
 	}
 	public void addMoneytoWallet(double amount) {
 		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
