@@ -2,7 +2,7 @@ create database Paymentapp;
 Show Databases;
 use Paymentapp;
 CREATE TABLE User_Info (
-    User_Id INT NOT NULL,
+    User_Id INT auto_increment not NULL,
     First_Name VARCHAR(25),
     Last_Name VARCHAR(25),
     Phone_No varchar(15),
@@ -27,16 +27,27 @@ CREATE TABLE Bank_Account_Details (
     FOREIGN KEY (Acct_TypeId) REFERENCES Acct_Types(Bank_AcctTypeId),
     PRIMARY KEY (Bank_AcctNo)
 );
- describe BankAccount;
- -- drop table BankAccount;
+select * from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_SCHEMA = 'paymentapp' and TABLE_NAME = 'Bank_Account_Details';
+
+alter table Bank_Account_Details drop foreign key bank_account_details_ibfk_1;
+
+alter table Bank_Account_Details drop foreign key bank_account_details_ibfk_2;
+ describe Bank_Account_Details;
+ drop table Bank_Account_Details;
  
  Create Table Acct_Types(
-	Bank_AcctTypeId int NOT NULL,
+	Bank_AcctTypeId int Auto_Increment NOT NULL,
     Bank_AcctTypeCode varchar(3),
     Bank_AcctTypeDesc varchar(20),
     primary Key (Bank_AcctTypeId)
  );
- drop table Acct_Types;
+-- drop table Acct_Types;
+ describe Acct_Types;
+ insert into Acct_Types(Bank_AcctTypeCode,Bank_AcctTypeDesc) values ("SA","SAVINGS");
+ insert into Acct_Types(Bank_AcctTypeCode,Bank_AcctTypeDesc) values ("CU","CURRENT");
+ insert into Acct_Types(Bank_AcctTypeCode,Bank_AcctTypeDesc) values ("SL","SALARY");
+ insert into Acct_Types(Bank_AcctTypeCode,Bank_AcctTypeDesc) values ("LO","LOAN");
+select * from Acct_Types;
  CREATE TABLE Transaction (
     Txn_Id Int NOT NULL,
     Txn_Date date,
