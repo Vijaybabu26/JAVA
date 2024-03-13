@@ -18,7 +18,7 @@ public class Useroperations {
 	List<User>users = Runpaymentapp.userlist;
 	List<Bankaccount> Bank = Runpaymentapp.Bankacctlist;
 	Map<Integer , Wallet> Walletlist = Runpaymentapp.Walletlist; 
-	Map<Integer , Transaction > Txnlist = Runpaymentapp.Txnlist;
+	List<Transaction> Txnlist = Runpaymentapp.TxnList;
 	
 //	List<User> users = null;
 //	List<Bankaccount> Bankacctlist = null;
@@ -53,12 +53,7 @@ public class Useroperations {
 				System.out.println("User Details of "+ u.getFirstName());
 				System.out.println(u);
 			}
-		}
-			
-		
-		
-	
-		
+		}	
 	}
 	
 	public boolean verifyuserid(String userId,String password) {
@@ -84,11 +79,15 @@ public class Useroperations {
 		
 		
 	}
-//	public void minitransaction(int UserId) {
-//		for(User u : users) {
-//			if(u)
-//		}
-//	}
+	public Map<User,List<Transaction>> PrintTxnHistory() {
+		Map<User,List<Transaction>> usertxn = new HashMap<User,List<Transaction>>();
+		for(User u :users) {
+			if(users != null) {
+				usertxn.put(u,u.getTxnlist());
+			}
+		}
+		return usertxn;
+	}
 	public Map<User,List<Bankaccount>> getUserBankAccount(){
 		Map<User, List<Bankaccount>> userBankAcctMap = new HashMap<User, List<Bankaccount>>() ;
 		

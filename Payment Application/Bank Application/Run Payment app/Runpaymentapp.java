@@ -22,7 +22,7 @@ public class Runpaymentapp {
 	public static List<User> userlist = new ArrayList<User>();
 	public static List<Bankaccount> Bankacctlist = new ArrayList<Bankaccount>();
 	public static Map<Integer, Wallet> Walletlist = new HashMap<Integer , Wallet>();
-	public static Map<Integer,Transaction> Txnlist = new HashMap<Integer,Transaction>();
+	public static List<Transaction> TxnList = new ArrayList<Transaction>();
 	public static int CurrUserId =-1;
 
 	
@@ -321,6 +321,19 @@ public class Runpaymentapp {
 			
 		}
 		public static void PrintTransactionOfUser() {
+			Useroperations ops = new Useroperations();
+			Map<User, List<Transaction>> mapItems = ops.PrintTxnHistory();
+			for(User u : mapItems.keySet()) {
+				List<Transaction> usertxn = mapItems.get(TxnList);
+				System.out.println(TxnList);
+				if(usertxn != null) {
+					for(Transaction txn : usertxn) {
+						System.out.println("-->" + txn.PrintTxn() );
+					}
+				}else {
+					System.out.println("please do transaction");
+				}
+			}
 //			Useroperations ops = new Useroperations();
 //			Transaction tx = new Transaction();
 //			Map<User,Map<Integer,Transaction>> mapItems = ops.getUserTransaction();
@@ -402,7 +415,7 @@ public class Runpaymentapp {
 		    System.out.println("Account not found.");
 		}
 
-			
+		
 
 		public static void DelBankAcc(int UserId, long accnum, List<User> userlist) {
 		    for(User u : userlist) {
@@ -474,7 +487,8 @@ public class Runpaymentapp {
 							System.out.println("Transaction Failed");
 							}
 							
-				}else if(txn.getTxnsrc()==Transactiontype.BANK){
+				}
+				if(txn.getTxnsrc()==Transactiontype.BANK){
 	//					Bankaccount BankAcct = Bankacctlist.get(Runpaymentapp.CurrUserId);
 						System.out.println("Select Option to Send Money to Reciever account type");
 						System.out.println("BANK");
@@ -602,6 +616,7 @@ public class Runpaymentapp {
 							System.out.println("Transaction Failed");
 							}
 						 }
+						 TxnList.add(txn);
 	
 				}
 			if(option == 2) {
