@@ -8,6 +8,7 @@ import bankapp.entity.Bankaccount;
 import bankapp.entity.User;
 
 public class PaymentCLIDAO {
+	
 	public void UserDb(User u) throws ClassNotFoundException,SQLException{
 		try {
 			

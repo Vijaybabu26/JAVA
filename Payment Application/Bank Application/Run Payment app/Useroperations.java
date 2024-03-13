@@ -42,8 +42,8 @@ public class Useroperations {
 			throw new Exception();
 		}
 		u.setUserId((int)(Math.random()*1000)+100);
-		Fileops fo = new Fileops();
-		fo.WriteUsertofile(u);
+//		Fileops fo = new Fileops();
+//		fo.WriteUsertofile(u);
 		return u;
 	}
 	
@@ -100,15 +100,7 @@ public class Useroperations {
 		}
 		return userBankAcctMap;
 	}
-	public Map<User,Map<Integer,Transaction>> getUserTransaction(){
-//		Map<User,Map<Integer,Transaction>> UserTxn = new HashMap<User,Map<Integer,Transaction>>();
-//		for(Transaction u :Txnlist) {
-//			if(Txnlist != null) {
-//				UserTxn.put(u,u.getTxnlist());
-//			}
-//		}
-//		return UserTxn;
-	}
+	
 	public void addMoneytoWallet(double amount) {
 		if(Walletlist.containsKey(Runpaymentapp.CurrUserId)) {
 			
@@ -160,10 +152,19 @@ public class Useroperations {
 		}
 		return false;
 	}
-	public boolean BTransaction(Bankaccount Sender, Bankaccount Reciever, Txn tType, double amount) {
+	public boolean BBTransaction(Bankaccount Sender, Bankaccount RecieverB, Txn tType, double amount) {
 		if(Sender.getBankBal()>amount) {
-			Reciever.setBankBal(Reciever.getBankBal()+amount);
+			RecieverB.setBankBal(RecieverB.getBankBal()+amount);
 			Sender.setBankBal(Sender.getBankBal()-amount);
+			return true;
+		}
+		return false;
+		
+	}
+	public boolean BWTransaction(Bankaccount Sender, Wallet recieverw, Txn tType, double txamount) {
+		if(Sender.getBankBal()>txamount) {
+			recieverw.setBalance(recieverw.getBalance()+txamount);
+			Sender.setBankBal(Sender.getBankBal()-txamount);
 			return true;
 		}
 		return false;
