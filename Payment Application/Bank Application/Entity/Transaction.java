@@ -126,8 +126,8 @@ public class Transaction {
 		Transactiontype = transactiontype;
 	}
 
-	@Override
-	public String toString() {
+
+	public String PrintTxn() {
 		return "--->" +": Transaction ID " + TxnId + "Transaction date : " + TransactionDate 
 				+ "Transaction Amount: "+txnamount + "Transaction Source Type" + Txnsrc 
 				+" Amount sent to UserId "+ UserId + "Transaction Destination Type"
