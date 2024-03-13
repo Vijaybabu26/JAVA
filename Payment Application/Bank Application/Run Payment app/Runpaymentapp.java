@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.mysql.cj.protocol.a.CompressedPacketSender;
+
 import bankapp.entity.Acctype;
 import bankapp.entity.Bankaccount;
 import bankapp.entity.Transaction;
@@ -473,11 +476,11 @@ public class Runpaymentapp {
 							
 				}else if(txn.getTxnsrc()==Transactiontype.BANK){
 	//					Bankaccount BankAcct = Bankacctlist.get(Runpaymentapp.CurrUserId);
-						System.out.println("Select Option to Send Money to Reciever");
+						System.out.println("Select Option to Send Money to Reciever account type");
 						System.out.println("BANK");
 						System.out.println("WALLET");
 						String recieverSrc = ty.next();
-						if(recieverSrc.equals("BANK")) {
+						if(recieverSrc.equalsIgnoreCase("BANK")) {
 							System.out.println("Amount Will Be Credited in User's Bank Account");
 							Bankaccount BankAcct = null;
 							 for(Bankaccount b : Bankacctlist) {
@@ -504,12 +507,12 @@ public class Runpaymentapp {
 								boolean res = ops.BBTransaction(BankAcct, Destination, txn.getTransactiontype(), Txamount);
 								if(res== true) {
 									System.out.println("Transaction completed");
-									System.out.println("Your Current Balance : " + Destination.getBankBal());
+									System.out.println("Your Current Balance : " + BankAcct.getBankBal());
 										}else{
 										System.out.println("Transaction Failed");
 										}
 								}
-							if(recieverSrc.equals("WALLET")){
+							if(recieverSrc.equalsIgnoreCase("WALLET")){
 								System.out.println("Amount Will Be Credited in User's Wallet");
 								Bankaccount BankAcct = null;
 								for(Bankaccount b : Bankacctlist) {
@@ -526,35 +529,79 @@ public class Runpaymentapp {
 								double txamount = ty.nextDouble();
 								txn.setTransactionDate(date);
 								txn.setTxnId(date.toString());
-								boolean res = ops.BWTransaction(BankAcct, w,null, txamount);
+								boolean res = ops.BWTransaction(BankAcct, destination,txn.getTransactiontype(), txamount);
+								if(res== true) {
+									System.out.println("Transaction completed");
+									System.out.println("Your Current Balance : " + BankAcct.getBankBal());
+										}else{
+										System.out.println("Transaction Failed");
+										}
+								}
 								
 							}
 					
 						
-			       }else if (txn.getTxnsrc()==Transactiontype.WALLET)  {
-						Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
-						 txn.setSourceWallet(Source);
-						 System.out.println("Enter The Reciver UserId To Send : ");
-						 int Reciever = ty.nextInt();
-						 
-						 Wallet Destination = Walletlist.get(Reciever);
-						 txn.setDestinationWallet(Destination);
+			       }
+					if(txn.getTxnsrc()==Transactiontype.WALLET)  {
 						
-						 System.out.println("Enter The Amount To Send :");
-						 double Txamount = ty.nextDouble() ;
-						 txn.setTransactionDate(date);
-						 txn.setTxnId(date.toString());
-						boolean res = ops.WTransaction(Source,Destination,txn.getTransactiontype(),Txamount);
-							if(res== true) {
-						System.out.println("Transaction completed");
-						System.out.println("Your Current Balance : " + w.getBalance());
-						
+						 System.out.println("Select Option to Send Money to Reciever account type");
+						 	System.out.println("BANK");
+						 	System.out.println("WALLET");
+						 	
+						 String recieversrc = ty.next();
+						 if(recieversrc.equalsIgnoreCase("WALLET")) {
+							 System.out.println("Amount Will Be Sent User Wallet ");
+							 Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
+							 txn.setSourceWallet(Source);
+							 System.out.println("Enter The Reciver UserId To Send : ");
+							 int Reciever = ty.nextInt();
+							 
+							 Wallet Destination = Walletlist.get(Reciever);
+							 txn.setDestinationWallet(Destination);
+							
+							 System.out.println("Enter The Amount To Send :");
+							 double Txamount = ty.nextDouble() ;
+							 txn.setTransactionDate(date);
+							 txn.setTxnId(date.toString());
+							boolean res = ops.WwTransaction(Source,Destination,txn.getTransactiontype(),Txamount);
+								if(res== true) {
+							System.out.println("Transaction completed");
+							System.out.println("Your Current Balance : " + w.getBalance());
+							
+								}else
+								{
+								System.out.println("Transaction Failed");
+								
+							
+							}
+						 }
+						 if(recieversrc.equalsIgnoreCase("BANK")) {
+							
+							 System.out.println("Amount Will be Sent to Users Bank Account");
+							 Wallet Source = Walletlist.get(Runpaymentapp.CurrUserId);
+							 txn.setSourceWallet(Source);
+							 System.out.println("Enter The Bank Account Number To Send");
+							 int recieverb = ty.nextInt();
+							 Bankaccount Destination = null;
+								for(Bankaccount ba : Bankacctlist) {
+									if(ba.getBankacctnumber() == recieverb) {
+										Destination = ba;
+									}
+								}
+							txn.setDestinationBank(Destination);
+							System.out.println("Enter Amount to Send Money: ");
+							double txamount = ty.nextDouble();
+							txn.setTransactionDate(date);
+							txn.setTxnId(date.toString());
+							boolean res = ops.WbTransaction(Source, Destination, txn.getTransactiontype(), txamount);
+							if(res == true) {
+								System.out.println("Transaction completed");
+								System.out.println("Your Current Balance : " + Destination.getBankBal());
 							}else
 							{
 							System.out.println("Transaction Failed");
 							}
-						
-						}
+						 }
 	
 				}
 			if(option == 2) {

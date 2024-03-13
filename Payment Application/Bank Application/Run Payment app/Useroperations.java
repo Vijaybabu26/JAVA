@@ -137,14 +137,7 @@ public class Useroperations {
 	
 		
 	}
-	public boolean WTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
-		if(Sender.getBalance()>amount) {
-			Receiver.setBalance(Receiver.getBalance()+ amount);
-			Sender.setBalance(Sender.getBalance()-amount);
-			return true;	
-		}
-		return false;
-	}
+	
 	public boolean CTransaction(Wallet Reciever, Txn tType, double amount) {
 		if(amount >= 0) {
 			Reciever.setBalance(Reciever.getBalance()+ amount);
@@ -170,6 +163,23 @@ public class Useroperations {
 		return false;
 		
 	}
+	public boolean WwTransaction(Wallet Sender, Wallet Receiver, Txn tType, double amount) {
+		if(Sender.getBalance()>amount) {
+			Receiver.setBalance(Receiver.getBalance()+ amount);
+			Sender.setBalance(Sender.getBalance()-amount);
+			return true;	
+		}
+		return false;
+	}
+	public boolean WbTransaction(Wallet Sender, Bankaccount Recieverb, Txn tType, double txamount) {
+		if(Sender.getBalance()>txamount) {
+			Recieverb.setBankBal(Recieverb.getBankBal()+txamount);
+			Sender.setBalance(Sender.getBalance()-txamount);
+			return true;	
+		}
+		return false;
+	}
+	
 	
 }
 
