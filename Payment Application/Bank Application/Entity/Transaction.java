@@ -14,6 +14,7 @@ public class Transaction {
 	Wallet sourceWallet;
 	Wallet destinationWallet;
 	Bankaccount SourceBank;
+	Bankaccount DestinationBank;
 	
 	public Bankaccount getSourceBank() {
 		return SourceBank;
@@ -34,7 +35,7 @@ public class Transaction {
 		DestinationBank = destinationBank;
 	}
 
-	Bankaccount DestinationBank;
+	
 	
 	
 	public String getTxnId() {
