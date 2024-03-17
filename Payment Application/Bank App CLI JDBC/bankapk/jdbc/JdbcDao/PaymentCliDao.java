@@ -66,6 +66,57 @@ public class PaymentCliDao {
 		}	
 		
 	}
+	public static void PrintUserList() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			Statement Stm = Con.createStatement();
+			String UserList = "Select * from User_Info";
+			ResultSet res = Stm.executeQuery(UserList);
+			while(res.next()) {
+				System.out.println(res.getInt(1)+" "+res.getString(2));
+			}
+			Stm.close();
+		}catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public static void CurrLoginUserId() {
+		User u = new User();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			Statement Stm = Con.createStatement();
+			String CurrLoginUser = "Select * from User_Info where User_Id = '"+u.getUserId()+"'";
+			ResultSet res = Stm.executeQuery(CurrLoginUser);
+			while(res.next()) {
+				System.out.println(res.getInt(1)+" "+res.getString(2));
+			}
+			Stm.close();
+		}catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public static void BankAcctList() {
+		BankAccount ba = new BankAccount();
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			Statement Stm = Con.createStatement();
+			String BankUserList = "Select * from Bank_Account_Details where User_Id = '"+ba.getUserId()+"'";
+			ResultSet res = Stm.executeQuery(BankUserList);
+			while(res.next()) {
+				System.out.println(res.getInt(1)+" "+res.getString(2));
+			}
+			Stm.close();
+		}catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
 }
 	
 

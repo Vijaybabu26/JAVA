@@ -19,6 +19,10 @@ public class Runpaymentappjdbc {
 				System.out.println("1.Register New User");
 				System.out.println("2.Login");
 				System.out.println("3.Add Bank Account to User");
+				System.out.println("4.List Of Users.");
+				System.out.println("5.Current User Id");
+				System.out.println("6.List Current Bank Accounts");
+				System.out.println("7.Add Money to Wallet");
 				System.out.println("Choose an Option:");
 				String OptStr = opt.next();
 				try {	
@@ -54,9 +58,33 @@ public class Runpaymentappjdbc {
 				}else if(OptStr.equalsIgnoreCase("3")) {
 					
 					if(CurrUserId != -1) {
-						
+						AddBankAcc();
+					}else {
+						System.out.println("Login Add Bank Account");
 					}
 					
+				}else if(OptStr.equalsIgnoreCase("4")) {
+					
+					PaymentCliDao.PrintUserList();
+					
+				}else if(OptStr.equalsIgnoreCase("5")) {
+					if(CurrUserId != -1) {
+						PaymentCliDao.CurrLoginUserId();
+					}else {
+						System.out.println("NO User Has Been Logged In");
+					}
+				}else if(OptStr.equalsIgnoreCase("6")) {
+					if(CurrUserId != -1) {
+						PaymentCliDao.BankAcctList();
+					}else {
+						System.out.println("Login see Bank Accounts");
+					}
+				}else if (OptStr.equalsIgnoreCase("7")) {
+					if(CurrUserId != -1) {
+						
+					}else {
+						System.out.println("Login To Add Money To Wallet");
+					}
 				}
 			}
 			
