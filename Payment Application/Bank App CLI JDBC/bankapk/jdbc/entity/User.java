@@ -9,7 +9,7 @@ public class User {
 	private String DateOfBirth;
 	private String Address;
 	private String PassWord;
-//	private Wallet Wallet;
+	private Wallet Wallet;
 	
 	public int getUserId() {
 		return UserId;
@@ -52,6 +52,12 @@ public class User {
 	}
 	public void setPassWord(String passWord) {
 		PassWord = passWord;
+	}
+	public Wallet getWallet() {
+		return Wallet;
+	}
+	public void setWallet(Wallet wallet) {
+		Wallet = wallet;
 	}
 	
 	 

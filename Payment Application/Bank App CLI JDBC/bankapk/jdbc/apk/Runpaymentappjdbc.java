@@ -16,13 +16,16 @@ public class Runpaymentappjdbc {
 			
 			while(true) {
 				System.out.println("Please Select One Option");
-				System.out.println("1.Register New User");
-				System.out.println("2.Login");
-				System.out.println("3.Add Bank Account to User");
-				System.out.println("4.List Of Users.");
-				System.out.println("5.Current User Id");
-				System.out.println("6.List Current Bank Accounts");
-				System.out.println("7.Add Money to Wallet");
+				System.out.println("1. Register New User");
+				System.out.println("2. Login");
+				System.out.println("3. Add Bank Account to User");
+				System.out.println("4. List Of Users.");
+				System.out.println("5. Current User Id");
+				System.out.println("6. List Current Bank Accounts");
+				System.out.println("7. Add Money to Wallet");
+				System.out.println("8. Check Amount In Wallet");
+				System.out.println("9. Add Money to Bank");
+				System.out.println("10. Check Bank Account Balance");
 				System.out.println("Choose an Option:");
 				String OptStr = opt.next();
 				try {	
@@ -65,25 +68,43 @@ public class Runpaymentappjdbc {
 					
 				}else if(OptStr.equalsIgnoreCase("4")) {
 					
-					PaymentCliDao.PrintUserList();
+					PaymentCliDao.PrintUserListDb();
 					
 				}else if(OptStr.equalsIgnoreCase("5")) {
 					if(CurrUserId != -1) {
-						PaymentCliDao.CurrLoginUserId();
+						PaymentCliDao.CurrLoginUserIdDb();
 					}else {
 						System.out.println("NO User Has Been Logged In");
 					}
 				}else if(OptStr.equalsIgnoreCase("6")) {
 					if(CurrUserId != -1) {
-						PaymentCliDao.BankAcctList();
+						PaymentCliDao.BankAcctListDb();
 					}else {
 						System.out.println("Login see Bank Accounts");
 					}
 				}else if (OptStr.equalsIgnoreCase("7")) {
 					if(CurrUserId != -1) {
-						
+						AddMoneyToWallet();
 					}else {
 						System.out.println("Login To Add Money To Wallet");
+					}
+				}else if(OptStr.equalsIgnoreCase("8")) {
+					if(CurrUserId != -1) {
+						PaymentCliDao.CheckCurrWalletBalDb();
+					}else {
+						System.out.println("Login To Check Money In Wallet");
+					}
+				}else if(OptStr.equalsIgnoreCase("9")) {
+					if(CurrUserId != -1) {
+						AddMoneyToBank();
+					}else {
+						System.out.println("Login To Check Money In Wallet");
+					}
+				}else if(OptStr.equalsIgnoreCase("10")) {
+					if(CurrUserId != -1) {
+						CheckBankBanl();
+					}else {
+						System.out.println("Login To Check Money In Wallet");
 					}
 				}
 			}
@@ -137,6 +158,7 @@ public class Runpaymentappjdbc {
 			PaymentCliDao db = new PaymentCliDao();
 			if(PaymentCliDao.Logindb(UId, PassWord)) {
 				CurrUserId = UId;
+				db.Logindb(UId, PassWord);
 				System.out.println("Login Success");
 				
 			}else {
@@ -192,6 +214,50 @@ public class Runpaymentappjdbc {
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		public static void AddMoneyToWallet() {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Your Adding Amount To Wallet");
+			System.out.println("Enter The Amount to Add Wallet : ");
+			double Wamount = sc.nextDouble();
+			Wallet w = new Wallet ();
+			w.setWalletLimit(5000);
+			if(Wamount <= 1000) {
+				w.setCurrWalletBalance(Wamount);
+				PaymentCliDao.AddMoneyToWalletDb();
+				System.out.println("Now Your Current Wallet Balance is" + w.getCurrWalletBalance());
+			}else {
+				System.out.println("Maximum Amount Deposit is 1000");
+			}
+		}
+		public static void AddMoneyToBank() {
+			Scanner sc = new Scanner(System.in);
+			BankAccount ba = new BankAccount();
+			PaymentCliDao db = new PaymentCliDao();
+				System.out.println("Enter the amount to add Bank :");
+				double Bamount= sc.nextDouble();
+				System.out.println("Enter the Account Number To Send Money:");
+				long AccNo = sc.nextLong();
+				if(PaymentCliDao.VerifyAccountNo()) {
+					PaymentCliDao.AddMoneyToBankDb();
+					System.out.println("Now your Current Bank Account Balance is " + ba.getCurrBankBal());
+					
+				}
+		}
+		public static void CheckBankBanl(){
+			Scanner sc = new Scanner(System.in);
+			BankAccount ba = new BankAccount();
+			
+			System.out.println("Enter the Account Number To Send Money:");
+			long AccNo = sc.nextLong();
+			
+			
+			if(PaymentCliDao.VerifyAccountNo()) {
+				PaymentCliDao.CheckCurrBankBalDb();
+				System.out.println("Now your Current Bank Account Balance is "+ ba.getCurrBankBal() );
+				
+			}
+			
 		}
 
 }
