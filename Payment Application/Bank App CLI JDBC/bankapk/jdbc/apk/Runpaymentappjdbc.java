@@ -32,7 +32,7 @@ public class Runpaymentappjdbc {
 				SelectedOption = Integer.parseInt(OptStr);
 				}catch(NumberFormatException e){
 					e.printStackTrace();
-					e.getMessage();	
+					e.getMessage();
 					System.out.println("Number Format Error. Please Choose Another Option.");
 				}catch(ArithmeticException e){
 					e.printStackTrace();

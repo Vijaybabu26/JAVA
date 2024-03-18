@@ -2,6 +2,7 @@ package bankapk.jdbc.JdbcDao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +20,7 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Uquery = "insert into User_Info(First_Name,Last_Name,Phone_No,Date_Of_Birth,Address,PassWord,Curr_Wallet_Balance)" + "values +"
+			String Uquery = "insert into User_Info(First_Name,Last_Name,Phone_No,Date_Of_Birth,Address,PassWord,Curr_Wallet_Balance)" + "values "
 					+ "('"+u.getFirstName()+"','"+u.getLastName()+"','"+u.getPhoneNo()+"','"+u.getDateOfBirth()+"','"+u.getAddress()+"','"+u.getPassWord()+"','"+0+"')";
 			Stm.executeUpdate(Uquery);
 			Stm.close();
@@ -35,10 +36,12 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Uquery = "Select * from User_Info where User_Id = '"+u.getUserId()+"'and PassWord ='"+u.getPassWord()+"'";
+//			PreparedStatement pstm = Con.prepareStatement(PassWord);
+			String Uquery = "Select User_Id,PassWord from User_Info where User_Id = '"+u.getUserId()+"'and PassWord ='"+u.getPassWord()+"'";
 			
 			ResultSet res = Stm.executeQuery(Uquery);
 			if(res.next()) {
+				res.next();
 				System.out.println("Login successful!");
 				return true;
 			}else{
@@ -59,7 +62,7 @@ public class PaymentCliDao {
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
 			Statement Stm = Con.createStatement();
 			String BankQuery = "insert into Bank_Account_Details (Bank_AcctNo,Bank_AcctBankName,Acct_TypeId,Bank_IFSC_Code,Bank_AcctPin,User_Id,Curr_Bank_Balance)+"
-					+ "values('"+ba.getAccNo()+"','"+ba.getAcctBankName()+"','"+ba.getBankAcctType()+"','"+ba.getAcctIFSCCode()+"','"+ba.getAcctPin()+"','"+u.getUserId()+"','"+0+"')";
+					+ "values"+"('"+ba.getAccNo()+"','"+ba.getAcctBankName()+"','"+ba.getBankAcctType()+"','"+ba.getAcctIFSCCode()+"','"+ba.getAcctPin()+"','"+u.getUserId()+"','"+0+"')";
 			Stm.executeUpdate(BankQuery);
 			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
@@ -82,10 +85,10 @@ public class PaymentCliDao {
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
-		}
+		} 
 	}
 	public static void CurrLoginUserIdDb() {
-		User u = new User();
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
