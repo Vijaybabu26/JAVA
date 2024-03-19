@@ -132,7 +132,7 @@ public class Runpaymentappjdbc {
 			User u = null;
 			
 			try {
-				u = ops.UserRegistration(FirstName, LastName, PhoneNo, DOB, PassWord, Address);
+				u = ops.UserRegistration(FirstName, LastName, PhoneNo, DOB, Address ,PassWord);
 //				userlist.add(u);
 				PaymentCliDao db = new PaymentCliDao();
 				db.UserRdb(u);
@@ -182,7 +182,7 @@ public class Runpaymentappjdbc {
 				System.out.println(" "+ type);
 			}
 			 AcctType Accty = null;
-		        while (Accty == null) {
+		       
 			try {
 				System.out.println("Enter a number from 0 to 3:");
 		       int Acct_TypeId = opt.nextInt();
@@ -200,7 +200,7 @@ public class Runpaymentappjdbc {
 					System.out.println(" "+ type);
 				}
 			}
-		        }
+		        
 			System.out.println("Enter the Account IFSC Code :");
 			String AcctIFSCCode = opt.next();
 			System.out.println("Enter the Account Pin : ");
