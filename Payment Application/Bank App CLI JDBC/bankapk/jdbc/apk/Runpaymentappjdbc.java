@@ -26,6 +26,7 @@ public class Runpaymentappjdbc {
 				System.out.println("8. Check Amount In Wallet");
 				System.out.println("9. Add Money to Bank");
 				System.out.println("10. Check Bank Account Balance");
+				System.out.println("11. User Log Out.");
 				System.out.println("Choose an Option:");
 				String OptStr = opt.next();
 				try {	
@@ -106,6 +107,12 @@ public class Runpaymentappjdbc {
 					}else {
 						System.out.println("Login To Check Money In Wallet");
 					}
+				}else if(OptStr.equalsIgnoreCase("11")) {
+					if(CurrUserId != -1) {
+						LogOut();
+					}else {
+						System.out.println("NO User Has Been Logged In");
+					}
 				}
 			}
 			
@@ -156,14 +163,17 @@ public class Runpaymentappjdbc {
 			System.out.println("Enter Password :");
 			String PassWord = opt.next();
 			PaymentCliDao db = new PaymentCliDao();
-			if(PaymentCliDao.Logindb(UId, PassWord)) {
-				CurrUserId = UId;
-				db.Logindb(UId, PassWord);
-				System.out.println("Login Success");
+			
+				boolean	LoginUser = db.Logindb(UId, PassWord);
+				if(LoginUser) {
+					Runpaymentappjdbc.CurrUserId = UId;
+					System.out.println("Login successful!");
+				}else{
+					System.out.println("Login Failed");
+				}
+			
 				
-			}else {
-				System.out.println("Login Failed");
-			}
+			
 			
 		}
 		public static void AddBankAcc() {
@@ -179,27 +189,48 @@ public class Runpaymentappjdbc {
 			System.out.println("Enter the Bank Account Type");
 			System.out.println("Please Select The Account Type :");
 			for(AcctType type : AcctType.values()) {
-				System.out.println(" "+ type);
+			    System.out.println(" "+ type);
 			}
-			 AcctType Accty = null;
-		       
-			try {
-				System.out.println("Enter a number from 0 to 3:");
-		       int Acct_TypeId = opt.nextInt();
+			AcctType Accty = null;
 
-		        if (Acct_TypeId < 0 || Acct_TypeId > 3) {
-		            System.out.println("Invalid number. Please enter a number from 0 to 3.");
-		        } else {
-		            AcctType day = AcctType.values()[Acct_TypeId];
-		            System.out.println("You selected: " + Acct_TypeId);
-		        }
-		
+			try {
+			    System.out.println("Enter a number from 1 to 4:");
+			    String Accty1 = opt.next();
+			        System.out.println("You selected: " + Accty1);
+			        AcctType Acct = AcctType.valueOf(Accty1.toUpperCase());
+					int acctTypeId = Acct.getValue();
+
 			}catch(IllegalArgumentException ie) {
-				System.out.println("Please Select the Correct Acctype : ");
-				for(AcctType type : AcctType.values()) {
-					System.out.println(" "+ type);
-				}
+			    System.out.println("Please Select the Correct Acctype : ");
+			    for(AcctType type : AcctType.values()) {
+			        System.out.println(" "+ type);
+			    }
 			}
+
+//			System.out.println("Enter the Bank Account Type");
+//			System.out.println("Please Select The Account Type :");
+//			for(AcctType type : AcctType.values()) {
+//				System.out.println(" "+ type);
+//			}
+//			 AcctType Accty = null;
+//		       
+//			try {
+//				System.out.println("Enter a number from 1 to 4:");
+//		       int Acct_TypeId = opt.nextInt();
+//
+//		        if (Acct_TypeId < 1 || Acct_TypeId > 4) {
+//		        } else {
+//		            AcctType day = AcctType.values()[Acct_TypeId];
+//		             System.out.println("Invalid number. Please enter a number from 1 to 4.");
+//		           System.out.println("You selected: " + Acct_TypeId);
+//		        }
+//		
+//			}catch(IllegalArgumentException ie) {
+//				System.out.println("Please Select the Correct Acctype : ");
+//				for(AcctType type : AcctType.values()) {
+//					System.out.println(" "+ type);
+//				}
+//			}
 		        
 			System.out.println("Enter the Account IFSC Code :");
 			String AcctIFSCCode = opt.next();
@@ -208,8 +239,10 @@ public class Runpaymentappjdbc {
 			try {
 				BankAccount ba = null;
 				
+				
 				ba =ops.AddBankAcct(AccNo, AcctBankName, Accty, AcctIFSCCode, AcctPin);
-				PaymentCliDao db = new PaymentCliDao();
+			
+		
 				PaymentCliDao.UserBankDb(u, ba);
 			}catch (Exception e) {
 				e.printStackTrace();
@@ -257,6 +290,11 @@ public class Runpaymentappjdbc {
 				System.out.println("Now your Current Bank Account Balance is "+ ba.getCurrBankBal() );
 				
 			}
+			
+		}
+		public static void LogOut() {
+			System.out.println( CurrUserId +" UserId Has Been Logged Out");
+			CurrUserId =-1;
 			
 		}
 

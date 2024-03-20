@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import bankapk.jdbc.apk.Runpaymentappjdbc;
+import bankapk.jdbc.entity.AcctType;
 import bankapk.jdbc.entity.BankAccount;
 import bankapk.jdbc.entity.User;
 import bankapk.jdbc.entity.Wallet;
@@ -36,29 +37,25 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentappcli", "root", "root");
 			Statement Stm = Con.createStatement();
-//			PreparedStatement pstm = Con.prepareStatement(PassWord);
-			String Uquery = "Select User_Id,PassWord from User_Info where User_Id = '"+u.getUserId()+"'and PassWord ='"+u.getPassWord()+"'";
-			
-//			PreparedStatement ps = Con.prepareStatement(Uquery);
-//			ps.setInt(1, Uid);
-//			ps.setString(2, PassWord);
-			ResultSet res = Stm.executeQuery(Uquery);
-//			if(res.next()) {
-			boolean	LoginUser = res.next();
-			Runpaymentappjdbc.CurrUserId = Uid;
-				System.out.println("Login successful!");
-				Stm.close();
-				return LoginUser;
-//			}else{
-				
-//				System.out.println("Login Failed!");
-				
-//			}
-			
+
+//			String Uquery = "Select User_Id,PassWord from User_Info where User_Id = '"+u.getUserId()+"'and PassWord ='"+u.getPassWord()+"'";
+//			ResultSet res = Stm.executeQuery(Uquery);	
+//			res.next();
+//			return;
+			   String Uquery = "Select User_Id,PassWord from User_Info where User_Id = ? and PassWord = ?";
+	            PreparedStatement ps = Con.prepareStatement(Uquery);
+	            ps.setInt(1, Uid);
+	            ps.setString(2, PassWord);
+	            ResultSet res = ps.executeQuery();
+	            return res.next();
+		
+		
+
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
 		}
+
 		return false;
 	}
 	public static void UserBankDb(User u, BankAccount ba) {
@@ -66,9 +63,10 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentappcli", "root", "root");
 			Statement Stm = Con.createStatement();
-			String BankQuery = "insert into Bank_Account_Details (Bank_AcctNo,Bank_AcctBankName,Acct_TypeId,Bank_IFSC_Code,Bank_AcctPin,User_Id,Curr_Bank_Balance)+"
-					+ "values"+"('"+ba.getAccNo()+"','"+ba.getAcctBankName()+"','"+ba.getBankAcctType()+"','"+ba.getAcctIFSCCode()+"','"+ba.getAcctPin()+"','"+u.getUserId()+"','"+0+"')";
-			Stm.executeUpdate(BankQuery);
+			String BankQuery = "insert into Bank_Account_Details (Bank_AcctNo,Bank_AcctBankName,Acct_TypeId,Bank_IFSC_Code,Bank_AcctPin,User_Id,Curr_Bank_Balance) values ('"
+					+ ba.getAccNo() + "','" + ba.getAcctBankName() + "','" + ba.getBankAcctType() + "','" + ba.getAcctIFSCCode() + "','" + ba.getAcctPin() + "','" + u.getUserId() + "','" + 0 + "')";
+
+					Stm.executeUpdate(BankQuery);
 			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
 			
