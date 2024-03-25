@@ -127,7 +127,7 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
-			String BankUserList = "Select * from Bank_Account_Details where Bank_User_Id = '"+ba.getUserId()+"'";
+			String BankUserList = "Select * from Bank_Account_Details where Bank_User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			ResultSet res = Stm.executeQuery(BankUserList);
 			while(res.next()) {
 				System.out.println(res.getInt(1)+" "+res.getString(2));
@@ -199,43 +199,60 @@ public class PaymentCliDao {
 			e.printStackTrace();
 		}
 	}
-	public static void AddMoneyToBankDb() {
+	public static void AddMoneyToBankDb(double Bamount,long AccNo) {
 		BankAccount ba = new BankAccount();
 		User u = new User();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/Paymentappcli", "root", "root");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Baquery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance + '"+ba.getCurrBankBal()+"' where User_Id = '"+u.getUserId()+"' And where Bank_AcctNo = '"+ba.getAccNo()+"' ";
+			
+			String Baquery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance + '"+Bamount+"' where Bank_AcctNo = '"+AccNo+"' ";
 			Stm.executeUpdate(Baquery);
+			String Bquery = "Select Curr_Bank_Balance from Bank_Account_Details where Bank_AcctNo = '"+AccNo+"'";
+			
+			ResultSet res = Stm.executeQuery(Bquery);
+			if(res.next()) {
+				System.out.println(" Your current Wallet_Balance is "+res.getInt(1));
+			}else{
+				
+				System.out.println("User Not Found!");
+			
+			}
 			Stm.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
 		}
 	}
-	public static void CheckCurrBankBalDb() {
+	public static void CheckCurrBankBalDb(long AccNo) {
 		User u = new User();
 		BankAccount ba = new BankAccount();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Waquery = "Select Curr_Bank_Balance from Bank_Account_Details where User_Id = '"+u.getUserId()+"' And Bank_AcctNo =Bank_AcctNo = '"+ba.getAccNo()+"'";
+			String Waquery = "Select Curr_Bank_Balance from Bank_Account_Details where Bank_AcctNo = '"+AccNo+"'";
+			
+			ResultSet res = Stm.executeQuery(Waquery);
+			if(res.next()) {
+				System.out.println(" Your current Bank_Balance is "+res.getDouble(1));
+			}
 			Stm.executeQuery(Waquery);
+			
 			Stm.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
 		}
 	}
-	public static boolean VerifyAccountNo() {
+	public static boolean VerifyAccountNo(long AccNo) {
 		BankAccount ba =new BankAccount();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "root");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Uquery = "Select * from Bank_Account_Details where User_Id = '"+ba.getUserId()+"'and Bank_AcctNo ='"+ba.getAccNo()+"'";
+			String Uquery = "Select * from Bank_Account_Details where Bank_User_Id = '"+Runpaymentappjdbc.CurrUserId+"'and Bank_AcctNo ='"+AccNo+"'";
 			
 			ResultSet res = Stm.executeQuery(Uquery);
 			if(res.next()) {
@@ -277,7 +294,7 @@ public class PaymentCliDao {
 		return false;
 		
 	}
-	public static void DoWTransaction(int Sender, int Reciever, double TxnAmount) {
+	public static void DoWWTransaction(int Sender, int Reciever, double TxnAmount) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
@@ -325,6 +342,49 @@ public class PaymentCliDao {
 				System.out.println("User Not Found!");
 			
 			}
+		}catch (ClassNotFoundException | SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public static void DoBBTransaction(long SBank,double TxnAmount,long DBank) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			String SenderType = "DEBIT";
+			String RecieverType ="CREDIT";
+			String Txn_AcctType = "BANK ACCOUNT";
+			LocalDateTime now = LocalDateTime.now();
+			UUID UuiS = UUID.randomUUID();
+			UUID UuiD = UUID.randomUUID();
+			String TxnIdS = "TXNS" + UuiS.toString(); 
+			String TxnIdD = "TXND" + UuiD.toString();
+			String Bquery = "Select Bank_User_Id from Bank_Account_Details where Bank_AcctNo = '"+DBank+"'";
+			
+			ResultSet res = Stm.executeQuery(Bquery);
+			res.next();
+			int duser = res.getInt(1);
+
+			String Squery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance - '"+TxnAmount+"' where Bank_AcctNo = '"+SBank+"'";
+			
+			String Rquery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance + '"+TxnAmount+"' where Bank_AcctNo = '"+DBank+"'";
+			Stm.executeUpdate(Squery);
+			Stm.executeUpdate(Rquery);
+			
+			
+			String Tquery = "INSERT INTO Transaction (Txn_Id, Txn_Date, Txn_Amount, Txn_Type, Txn_AcctType, Txn_User_Id) VALUES " + 
+			            "('" + TxnIdS + "', '" + now + "', " + TxnAmount + ", '" + SenderType + "', '" + Txn_AcctType + "', '" + Runpaymentappjdbc.CurrUserId + "')";
+
+			String TxnQ = "INSERT INTO Transaction (Txn_Id, Txn_Date, Txn_Amount, Txn_Type, Txn_AcctType, Txn_User_Id) VALUES " + 
+		            "('" + TxnIdS + "', '" + now + "', " + TxnAmount + ", '" + SenderType + "', '" + Txn_AcctType + "', '" + duser+ "')";
+
+
+			
+			Stm.executeUpdate(Tquery);
+			Stm.executeUpdate(TxnQ);
+
+			
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();

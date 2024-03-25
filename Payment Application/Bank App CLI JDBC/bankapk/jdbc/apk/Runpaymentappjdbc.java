@@ -221,21 +221,16 @@ public class Runpaymentappjdbc {
 
 			try {
 				
-			        AcctType Acct = null;
+//			        AcctType Acct = null;
 			        
-			        while (Acct == null) {
-			            System.out.println("Enter a number from 1 to 4:");
-			            String Accty1 = opt.next();
-//			            
-			            Acct = AcctType.valueOf(Accty1);
-			            if (Acct == null) {
-			                System.out.println("Invalid number entered. please enter a number from 1 to 4.");
-			            } else {
-			                System.out.println("You selected: " + Acct);
-			                ba.setBankAcctType(Acct);
-			            }
-			        }
+			      
+			            System.out.println("Please Select One Option : ");
+			            
+			            String type = opt.next();
+			            AcctType Accty1 = AcctType.valueOf(type);
+			            ba.setBankAcctType(Accty1);
 			        
+			       
 			       
 			        }catch(IllegalArgumentException ie) {
 			    System.out.println("Please Select the Correct Acctype : ");
@@ -308,8 +303,8 @@ public class Runpaymentappjdbc {
 				double Bamount= sc.nextDouble();
 				System.out.println("Enter the Account Number To Send Money:");
 				long AccNo = sc.nextLong();
-				if(PaymentCliDao.VerifyAccountNo()) {
-					PaymentCliDao.AddMoneyToBankDb();
+				if(PaymentCliDao.VerifyAccountNo(AccNo)) {
+					PaymentCliDao.AddMoneyToBankDb(Bamount,AccNo);
 					
 					
 				}
@@ -318,15 +313,15 @@ public class Runpaymentappjdbc {
 			Scanner sc = new Scanner(System.in);
 			BankAccount ba = new BankAccount();
 			
-			System.out.println("Enter the Account Number To Send Money:");
+			System.out.println("Enter the Account Number :");
 			long AccNo = sc.nextLong();
 			
 			
-			if(PaymentCliDao.VerifyAccountNo()) {
-				PaymentCliDao.CheckCurrBankBalDb();
-				System.out.println("Now your Current Bank Account Balance is "+ ba.getCurrBankBal() );
+			PaymentCliDao.VerifyAccountNo(AccNo);
+				PaymentCliDao.CheckCurrBankBalDb(AccNo);
 				
-			}
+				
+	
 			
 		}
 		public static void LogOut() {
@@ -340,7 +335,9 @@ public class Runpaymentappjdbc {
 			
 				try {
 				System.out.println("1.Wallet to Wallet");
-				System.out.println("2.Wallet to Bank Account");
+				System.out.println("2.Bank Account To Bank Account");
+				System.out.println("3.Wallet To Bank Account");
+				System.out.println("4.Bank Account To Wallet");
 				System.out.println("please Select On Option: ");
 				String SelectOpt = sc.next();
 				if(SelectOpt.equalsIgnoreCase("1")) {
@@ -353,11 +350,23 @@ public class Runpaymentappjdbc {
 						double TxnAmount = sc.nextDouble();
 						int Sender = CurrUserId;
 						
-						PaymentCliDao.DoWTransaction(Sender,Reciever,TxnAmount);
+						PaymentCliDao.DoWWTransaction(Sender,Reciever,TxnAmount);
 					}
 					
 				}else if (SelectOpt.equalsIgnoreCase("2")) {
-					System.out.println("Working On It");
+					System.out.println("Enter the Account Number To Credit The Amount: ");
+					long DBank = sc.nextLong();
+					if(PaymentCliDao.VerifyAccountNo(DBank)) {
+						System.out.println("Enter the Amount To Send");
+						double TxnAmount = sc.nextDouble();
+						System.out.println("Enter the Account Number To Debit The Amount: ");
+						long SBank = sc.nextLong();
+						if(PaymentCliDao.VerifyAccountNo(SBank)) {
+							PaymentCliDao.DoBBTransaction(DBank,TxnAmount,SBank);
+						}
+						
+						
+					}
 				}
 			}catch(NumberFormatException e) {
 				e.printStackTrace();
