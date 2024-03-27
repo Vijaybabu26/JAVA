@@ -351,21 +351,35 @@ public class Runpaymentappjdbc {
 						int Sender = CurrUserId;
 						
 						PaymentCliDao.DoWWTransaction(Sender,Reciever,TxnAmount);
+						System.out.println("Transaction Completed !");
 					}
 					
 				}else if (SelectOpt.equalsIgnoreCase("2")) {
 					System.out.println("Enter the Account Number To Credit The Amount: ");
-					long DBank = sc.nextLong();
-					if(PaymentCliDao.VerifyAccountNo(DBank)) {
+					long DestBank = sc.nextLong();
+					if(PaymentCliDao.VerifyAccountNo(DestBank)) {
 						System.out.println("Enter the Amount To Send");
 						double TxnAmount = sc.nextDouble();
 						System.out.println("Enter the Account Number To Debit The Amount: ");
-						long SBank = sc.nextLong();
-						if(PaymentCliDao.VerifyAccountNo(SBank)) {
-							PaymentCliDao.DoBBTransaction(DBank,TxnAmount,SBank);
+						long SourceBank = sc.nextLong();
+						if(PaymentCliDao.VerifyAccountNo(SourceBank)) {
+							PaymentCliDao.DoBBTransaction(SourceBank,TxnAmount,DestBank);
+							System.out.println("Transcation Completed !");
 						}
-						
-						
+					}
+				}else if(SelectOpt.equalsIgnoreCase("3")) {
+					System.out.println("Enter the Bank Account Number : ");
+					long DestB = sc.nextLong();
+					if(PaymentCliDao.VerifyAccountNo(DestB)) {
+						System.out.println("Enter The Amount : ");
+						double TxnAmount = sc.nextDouble();
+						System.out.println("Enter Wallet User Id To Send The Amount : ");
+						int Duser = sc.nextInt();
+						if(PaymentCliDao.VerifyUserId(Duser)) {
+							
+							System.out.println("Transaction Completed !");
+							
+						}
 					}
 				}
 			}catch(NumberFormatException e) {
