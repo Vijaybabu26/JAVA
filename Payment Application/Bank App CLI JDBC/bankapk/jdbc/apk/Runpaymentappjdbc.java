@@ -21,14 +21,15 @@ public class Runpaymentappjdbc {
 				System.out.println("3. Add Bank Account to User");
 				System.out.println("4. List Of Users.");
 				System.out.println("5. Current User Id");
-				System.out.println("6. List Current Bank Accounts");
+				System.out.println("6. List Of Bank Accounts");
 				System.out.println("7. Add Money to Wallet");
 				System.out.println("8. Check Amount In Wallet");
 				System.out.println("9. Add Money to Bank");
 				System.out.println("10. Check Bank Account Balance");
 				System.out.println("11. Send Money To Other (Do Transaction)");
 				System.out.println("12. Transaction Mini Statement.");
-				System.out.println("13. Log Out.");
+				System.out.println("13. Delete Bank Account From CLI APP");
+				System.out.println("14. Log Out.");
 				System.out.println("Choose an Option:");
 				String OptStr = opt.next();
 				try {	
@@ -58,8 +59,14 @@ public class Runpaymentappjdbc {
 						RegisterUser();
 					
 				}else if(OptStr.equalsIgnoreCase("2")) {
+					if(CurrUserId != -1) {
+						
+						System.out.println("please log out the current User ");
 					
+					}else {
 						Login();
+					}
+						
 					
 				}else if(OptStr.equalsIgnoreCase("3")) {
 					
@@ -133,6 +140,13 @@ public class Runpaymentappjdbc {
 					}
 				}else if (OptStr.equalsIgnoreCase("13")) {
 					
+					if(CurrUserId != -1) {
+						DelBankAccount();
+					}else {
+						System.out.println("Please Log in To Delete The Bank Account ");
+					}
+					
+				}else if (OptStr.equalsIgnoreCase("14")) {
 					if(CurrUserId != -1) {
 						LogOut();
 					}else {
@@ -228,6 +242,7 @@ public class Runpaymentappjdbc {
 			            
 			            String type = opt.next();
 			            AcctType Accty1 = AcctType.valueOf(type);
+			           
 			            ba.setBankAcctType(Accty1);
 			        
 			       
@@ -376,9 +391,22 @@ public class Runpaymentappjdbc {
 						System.out.println("Enter Wallet User Id To Send The Amount : ");
 						int Duser = sc.nextInt();
 						if(PaymentCliDao.VerifyUserId(Duser)) {
-							
+							PaymentCliDao.DoWBTransaction(DestB, TxnAmount, Duser);
 							System.out.println("Transaction Completed !");
 							
+						}
+					}
+				}else if(SelectOpt.equalsIgnoreCase("4")) {
+					System.out.println("Enter The User Id To Send :");
+					int Suser = sc.nextInt();
+					if(PaymentCliDao.VerifyUserId(Suser)) {
+						System.out.println("Enter The Amount : ");
+						double TxnAmount = sc.nextDouble();
+						System.out.println("Enter the Account Number to Send :");
+						long Dbank = sc.nextLong();
+						if(PaymentCliDao.VerifyAccountNo(Dbank)) {
+							PaymentCliDao.DoBWTransaction(Suser, TxnAmount, Dbank);
+							System.out.println("Transaction Completed ! ");
 						}
 					}
 				}
@@ -389,6 +417,18 @@ public class Runpaymentappjdbc {
 			
 			
 			
+		}
+		public static void DelBankAccount() {
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Your Deleting the Bank Account From Cli App");
+			System.out.println("Enter The Account Number To Delete : ");
+			long DelB = sc.nextLong();
+			if(PaymentCliDao.VerifyAccountNo(DelB)) {
+				
+				PaymentCliDao.DelBankAcc(DelB);
+				
+			   System.out.println("Bank Account No "+ DelB+ " Deleted !");
+			}
 		}
 
 }

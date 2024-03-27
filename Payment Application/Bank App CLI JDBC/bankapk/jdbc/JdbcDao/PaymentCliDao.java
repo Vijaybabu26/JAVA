@@ -252,7 +252,7 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
-			String Uquery = "Select * from Bank_Account_Details where Bank_AcctNo ='"+AccNo+"'";
+			String Uquery = "Select * from Bank_Account_Details where Bank_AcctNo ='"+AccNo+"'" ;
 			
 			ResultSet res = Stm.executeQuery(Uquery);
 			if(res.next()) {
@@ -287,6 +287,7 @@ public class PaymentCliDao {
 				System.out.println("User Not Found!");
 			
 			}
+			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
@@ -304,11 +305,14 @@ public class PaymentCliDao {
 			boolean hasTransactions = false;
 			while(res.next()) {
 				System.out.println("Mini Statement Transaction Till Now ");
-				System.out.println("Trasaction Id : "+res.getString(1)+ " Transaction Date : "+ res.getDate(2)+ " Transaction Amount : " + res.getDouble(3)+" Type : " + res.getString(4)+" Source : "+ res.getString(5)+ " User Id : " +res.getInt(6));
+				
+				System.out.println("Trasaction Id : "+res.getString(1)+ " Transaction Date : "+ res.getDate(2)+ " Transaction Amount : " + res.getDouble(3)+" Transaction Type : " + res.getString(4)+" Source Account : "+ res.getString(5) +" Destination Account "+res.getString(6)+ " User Id : " +res.getInt(7));
+				
 			}
 			if(!hasTransactions){
-				System.out.println("No transactions found for the user!");
+				System.out.println("No More Transactions Found From this User!");
 			}
+			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
@@ -325,10 +329,10 @@ public class PaymentCliDao {
 			String Txn_AcctType_Dest = "WALLET";
 			LocalDateTime now = LocalDateTime.now();
 			
-			UUID UuiS = UUID.randomUUID();
-			UUID UuiD = UUID.randomUUID();
-			String TxnIdS = "TXNS" + UuiS.toString(); 
-			String TxnIdD = "TXND" + UuiD.toString();
+			UUID Uui = UUID.randomUUID();
+//			UUID UuiD = UUID.randomUUID();
+			String TxnIdS = "TXNS" + Uui.toString(); 
+			String TxnIdD = "TXND" + Uui.toString();
 			
 			String Bquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			
@@ -363,6 +367,7 @@ public class PaymentCliDao {
 				System.out.println("User Not Found!");
 			
 			}
+			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
@@ -378,10 +383,10 @@ public class PaymentCliDao {
 			String Txn_AcctType_Source = "BANK ACCOUNT";
 			String Txn_AcctType_Dest = "BANK ACCOUNT";
 			LocalDateTime now = LocalDateTime.now();
-			UUID UuiS = UUID.randomUUID();
-			UUID UuiD = UUID.randomUUID();
-			String TxnIdS = "TXNS" + UuiS.toString(); 
-			String TxnIdD = "TXND" + UuiD.toString();
+			UUID Uui = UUID.randomUUID();
+//			UUID UuiD = UUID.randomUUID();
+			String TxnIdS = "TXNS" + Uui.toString(); 
+			String TxnIdD = "TXND" + Uui.toString();
 			String Bquery = "Select Bank_User_Id from Bank_Account_Details where Bank_AcctNo = '"+DestBank+"'";
 			
 			ResultSet res = Stm.executeQuery(Bquery);
@@ -406,7 +411,7 @@ public class PaymentCliDao {
 			Stm.executeUpdate(Tquery);
 			Stm.executeUpdate(TxnQ);
 
-			
+			Stm.close();
 		}catch (ClassNotFoundException | SQLException e) {
 			
 			e.printStackTrace();
@@ -419,14 +424,14 @@ public class PaymentCliDao {
 			Statement Stm = Con.createStatement();
 			String SenderType = "DEBIT";
 			String RecieverType ="CREDIT";
-			String Txn_AcctType_Source = "BANK ACCOUNT";
-			String Txn_AcctType_Dest = "WALLET";
+			String Txn_AcctType_Source = "WALLET";
+			String Txn_AcctType_Dest = "BANK ACCOUNT";
 			LocalDateTime now = LocalDateTime.now();
-			UUID UuiS = UUID.randomUUID();
+			UUID Uui = UUID.randomUUID();
 //			UUID UuiD = UUID.randomUUID();
-			String TxnIdS = "TXNS" + UuiS.toString(); 
-			String TxnIdD = "TXND" + UuiS.toString();
-			String wquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance - '"+TxnAmount+"' where User_Id = '"+Duser+"'";
+			String TxnIdS = "TXNS" + Uui.toString(); 
+			String TxnIdD = "TXND" + Uui.toString();
+			String wquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance - '"+TxnAmount+"' where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 
 			String bquery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance + '"+TxnAmount+"' where Bank_AcctNo = '"+DestB+"'";
 			Stm.executeUpdate(wquery);
@@ -447,12 +452,64 @@ public class PaymentCliDao {
 			Stm.executeUpdate(TxnQ);
 			Stm.executeUpdate(Tquery);
 			
-
+			Stm.close();
 		}catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 			
 	}
-	
+	public static void DoBWTransaction(int Suser,double TxnAmount,long Dbank) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			String SenderType = "DEBIT";
+			String RecieverType ="CREDIT";
+			String Txn_AcctType_Source = "BANK ACCOUNT";
+			String Txn_AcctType_Dest = "WALLET";
+			LocalDateTime now = LocalDateTime.now();
+			UUID Uui = UUID.randomUUID();
+//			UUID UuiD = UUID.randomUUID();
+			String TxnIdS = "TXNS" + Uui.toString(); 
+			String TxnIdD = "TXND" + Uui.toString();
+			
+			String Bquery = "Update Bank_Account_Details Set Curr_Bank_Balance = Curr_Bank_Balance - '"+TxnAmount+"'  where Bank_AcctNo = '"+ Dbank +"'";
+			String Wquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance + '"+TxnAmount+"' where User_Id ='"+Suser+"'";
+			
+			Stm.executeUpdate(Wquery);
+			Stm.executeUpdate(Bquery);
+			
+			String Tquery = "INSERT INTO Transaction (Txn_Id, Txn_Date, Txn_Amount, Txn_Type, Txn_AcctType_Source,Txn_AcctType_Dest, Txn_User_Id) VALUES " + 
+		            "('" + TxnIdS + "', '" + now + "', " + TxnAmount + ", '" + SenderType + "', '" + Txn_AcctType_Source + "', '"+Txn_AcctType_Dest+"','" + Runpaymentappjdbc.CurrUserId + "')";
+			String TxnQ = "INSERT INTO Transaction (Txn_Id, Txn_Date, Txn_Amount, Txn_Type, Txn_AcctType_Source,Txn_AcctType_Dest, Txn_User_Id) VALUES " + 
+		            "('" + TxnIdD + "', '" + now + "', " + TxnAmount + ", '" + RecieverType + "', '" + Txn_AcctType_Source + "','"+Txn_AcctType_Dest+"', '" + Suser+ "')";
+
+			Stm.executeUpdate(TxnQ);
+			Stm.executeUpdate(Tquery);
+			
+			
+			Stm.close();
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void DelBankAcc(long DelB){
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			
+			String Delquery = "Delete from Bank_Account_Details where Bank_AcctNo = '"+DelB+"' And Bank_User_Id = '" +Runpaymentappjdbc.CurrUserId+ "'";
+			
+			Stm.executeUpdate(Delquery);
+			
+			
+			Stm.close();
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
+	
+
 	
