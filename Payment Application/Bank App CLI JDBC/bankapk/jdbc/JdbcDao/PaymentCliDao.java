@@ -145,6 +145,7 @@ public class PaymentCliDao {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
 			Statement Stm = Con.createStatement();
+			
 			String Waquery = "Update User_Info Set Curr_Wallet_Balance = Curr_Wallet_Balance + '"+Wamount+"' where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			Stm.executeUpdate(Waquery);
 			String Bquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
@@ -190,7 +191,9 @@ public class PaymentCliDao {
 			String Waquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
 			ResultSet res = Stm.executeQuery(Waquery);
 			while(res.next()) {
-				System.out.println(" Your current Wallet_Balance is "+res.getInt(1));
+				
+				double wallet = res.getDouble(1);
+				System.out.println(" Your current Wallet_Balance is "+wallet);
 			}
 			Stm.executeQuery(Waquery);
 			Stm.close();
@@ -266,6 +269,24 @@ public class PaymentCliDao {
 			Stm.close();
 		} catch (ClassNotFoundException | SQLException e) {
 			
+			e.printStackTrace();
+		}
+		return false;
+	}
+	public static boolean VerifyWalletAmount(double TxnAmount) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			String Vquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
+			ResultSet res = Stm.executeQuery(Vquery);
+			res.next();
+			double Amount = res.getDouble(1);
+			if(TxnAmount < Amount){
+				return true;
+			}
+			
+		}catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -509,6 +530,7 @@ public class PaymentCliDao {
 			e.printStackTrace();
 		}
 	}
+
 }
 	
 
