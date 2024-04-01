@@ -383,8 +383,12 @@ public class Runpaymentappjdbc {
 						System.out.println("Enter the Account Number To Debit The Amount: ");
 						long SourceBank = sc.nextLong();
 						if(PaymentCliDao.VerifyAccountNo(SourceBank)) {
+							if(PaymentCliDao.VerifyBankAmount(TxnAmount, SourceBank)) {
 							PaymentCliDao.DoBBTransaction(SourceBank,TxnAmount,DestBank);
 							System.out.println("Transcation Completed !");
+							}else {
+								System.out.println("Insufficient Balance");
+							}
 						}
 					}
 				}else if(SelectOpt.equalsIgnoreCase("3")) {
@@ -396,9 +400,12 @@ public class Runpaymentappjdbc {
 						System.out.println("Enter Wallet User Id To Send The Amount : ");
 						int Duser = sc.nextInt();
 						if(PaymentCliDao.VerifyUserId(Duser)) {
+							if(PaymentCliDao.VerifyBankAmount(TxnAmount, DestB)) {
 							PaymentCliDao.DoWBTransaction(DestB, TxnAmount, Duser);
 							System.out.println("Transaction Completed !");
-							
+							}else {
+								System.out.println("Insufficient Balance");
+							}
 						}
 					}
 				}else if(SelectOpt.equalsIgnoreCase("4")) {
@@ -410,8 +417,12 @@ public class Runpaymentappjdbc {
 						System.out.println("Enter the Account Number to Send :");
 						long Dbank = sc.nextLong();
 						if(PaymentCliDao.VerifyAccountNo(Dbank)) {
+							if(PaymentCliDao.VerifyWalletAmount(TxnAmount)) {
 							PaymentCliDao.DoBWTransaction(Suser, TxnAmount, Dbank);
 							System.out.println("Transaction Completed ! ");
+							}else {
+								System.out.println("Insufficient Balance");
+							}
 						}
 					}
 				}
