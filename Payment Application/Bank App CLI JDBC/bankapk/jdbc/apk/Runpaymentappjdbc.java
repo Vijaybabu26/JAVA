@@ -241,7 +241,7 @@ public class Runpaymentappjdbc {
 			            System.out.println("Please Select One Option : ");
 			            
 			            String type = opt.next();
-			            AcctType Accty1 = AcctType.valueOf(type);
+			            AcctType Accty1 = AcctType.SAVINGS;
 			           
 			            ba.setBankAcctType(Accty1);
 			        
@@ -306,6 +306,7 @@ public class Runpaymentappjdbc {
 				w.setCurrWalletBalance(Wamount);
 				PaymentCliDao.AddMoneyToWalletDb(Wamount);
 				System.out.println(w.getCurrWalletBalance()+" Is Added To Your Wallet.");
+				
 			}else {
 				System.out.println("Maximum Amount Deposit is 1000");
 			}
@@ -364,9 +365,13 @@ public class Runpaymentappjdbc {
 						System.out.println("Enter the amount to send the amount : ");
 						double TxnAmount = sc.nextDouble();
 						int Sender = CurrUserId;
-						
+						if(PaymentCliDao.VerifyWalletAmount(TxnAmount)) {
+
 						PaymentCliDao.DoWWTransaction(Sender,Reciever,TxnAmount);
 						System.out.println("Transaction Completed !");
+						}else {
+							System.out.println("Insufficient Balance");
+						}
 					}
 					
 				}else if (SelectOpt.equalsIgnoreCase("2")) {
