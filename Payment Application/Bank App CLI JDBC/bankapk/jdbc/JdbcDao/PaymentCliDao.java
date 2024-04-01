@@ -273,24 +273,6 @@ public class PaymentCliDao {
 		}
 		return false;
 	}
-	public static boolean VerifyWalletAmount(double TxnAmount) {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
-			Statement Stm = Con.createStatement();
-			String Vquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
-			ResultSet res = Stm.executeQuery(Vquery);
-			res.next();
-			double Amount = res.getDouble(1);
-			if(TxnAmount < Amount){
-				return true;
-			}
-			
-		}catch(ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 	public static boolean VerifyUserId(int Reciever) {
 		User u = new User();
 		boolean UserExist = false;
@@ -529,6 +511,43 @@ public class PaymentCliDao {
 		}catch(ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	public static boolean VerifyWalletAmount(double TxnAmount) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			String Vquery = "Select Curr_Wallet_Balance from User_Info where User_Id = '"+Runpaymentappjdbc.CurrUserId+"'";
+			ResultSet res = Stm.executeQuery(Vquery);
+			res.next();
+			double Amount = res.getDouble(1);
+			if(TxnAmount < Amount){
+				return true;
+			}
+			
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static boolean VerifyBankAmount(double TxnAmount,long SourceBank) {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection Con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Paymentapp", "root", "root");
+			Statement Stm = Con.createStatement();
+			String Vquery = "Select Curr_Bank_Balance from Bank_Account_Details where Bank_AcctNo = '"+SourceBank+"'";
+			ResultSet res = Stm.executeQuery(Vquery);
+			res.next();
+			double Amount = res.getDouble(1);
+			if(TxnAmount < Amount){
+				return true;
+			}
+			
+		}catch(ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
