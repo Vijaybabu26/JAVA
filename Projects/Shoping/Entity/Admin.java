@@ -3,11 +3,11 @@ package Shoping.Entity;
 
 public class Admin {
 	private int AdId;
-	private String FirstName;
-	private String LastName;
-	private long PhoneNo;
-	private String Address;
-	private String PassWord;
+	private String AdFirstName;
+	private String AdLastName;
+	private long AdPhoneNo;
+	private String AdAddress;
+	private String AdPassWord;
 	
 	public int getAdId() {
 		return AdId;
@@ -15,35 +15,35 @@ public class Admin {
 	public void setAdId(int adId) {
 		AdId = adId;
 	}
-	public String getFirstName() {
-		return FirstName;
+	public String getAdFirstName() {
+		return AdFirstName;
 	}
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
+	public void setAdFirstName(String adFirstName) {
+		AdFirstName = adFirstName;
 	}
-	public String getLastName() {
-		return LastName;
+	public String getAdLastName() {
+		return AdLastName;
 	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setAdLastName(String adLastName) {
+		AdLastName = adLastName;
 	}
-	public long getPhoneNo() {
-		return PhoneNo;
+	public long getAdPhoneNo() {
+		return AdPhoneNo;
 	}
-	public void setPhoneNo(long phoneNo) {
-		PhoneNo = phoneNo;
+	public void setAdPhoneNo(long adPhoneNo) {
+		AdPhoneNo = adPhoneNo;
 	}
-	public String getAddress() {
-		return Address;
+	public String getAdAddress() {
+		return AdAddress;
 	}
-	public void setAddress(String address) {
-		Address = address;
+	public void setAdAddress(String adAddress) {
+		AdAddress = adAddress;
 	}
-	public String getPassWord() {
-		return PassWord;
+	public String getAdPassWord() {
+		return AdPassWord;
 	}
-	public void setPassWord(String passWord) {
-		PassWord = passWord;
+	public void setAdPassWord(String adPassWord) {
+		AdPassWord = adPassWord;
 	}
 	
 //	private Wallet Wallet;

@@ -2,46 +2,47 @@ package Shoping.Entity;
 
 public class Customer {
 	private int CusId;
-	private String FirstName;
-	private String LastName;
-	private long PhoneNo;
-	private String Address;
-	private String PassWord;
-	
+	private String CusFirstName;
+	private String CusLastName;
+	private long CusPhoneNo;
+	private String CusAddress;
+	private String CusPassWord;
 	public int getCusId() {
 		return CusId;
 	}
 	public void setCusId(int cusId) {
 		CusId = cusId;
 	}
-	public String getFirstName() {
-		return FirstName;
+	public String getCusFirstName() {
+		return CusFirstName;
 	}
-	public void setFirstName(String firstName) {
-		FirstName = firstName;
+	public void setCusFirstName(String cusFirstName) {
+		CusFirstName = cusFirstName;
 	}
-	public String getLastName() {
-		return LastName;
+	public String getCusLastName() {
+		return CusLastName;
 	}
-	public void setLastName(String lastName) {
-		LastName = lastName;
+	public void setCusLastName(String cusLastName) {
+		CusLastName = cusLastName;
 	}
-	public long getPhoneNo() {
-		return PhoneNo;
+	public long getCusPhoneNo() {
+		return CusPhoneNo;
 	}
-	public void setPhoneNo(long phoneNo) {
-		PhoneNo = phoneNo;
+	public void setCusPhoneNo(long cusPhoneNo) {
+		CusPhoneNo = cusPhoneNo;
 	}
-	public String getAddress() {
-		return Address;
+	public String getCusAddress() {
+		return CusAddress;
 	}
-	public void setAddress(String address) {
-		Address = address;
+	public void setCusAddress(String cusAddress) {
+		CusAddress = cusAddress;
 	}
-	public String getPassWord() {
-		return PassWord;
+	public String getCusPassWord() {
+		return CusPassWord;
 	}
-	public void setPassWord(String passWord) {
-		PassWord = passWord;
+	public void setCusPassWord(String cusPassWord) {
+		CusPassWord = cusPassWord;
 	}
+	
+	
 }
