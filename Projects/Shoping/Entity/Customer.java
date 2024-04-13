@@ -7,6 +7,15 @@ public class Customer {
 	private long CusPhoneNo;
 	private String CusAddress;
 	private String CusPassWord;
+//	private Wallet CusWallet;
+//	
+//	
+//	public Wallet getCusWallet() {
+//		return CusWallet;
+//	}
+//	public void setCusWallet(Wallet cusWallet) {
+//		CusWallet = cusWallet;
+//	}
 	public int getCusId() {
 		return CusId;
 	}

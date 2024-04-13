@@ -2,6 +2,7 @@ package Shoping.Apk;
 
 import Shoping.Entity.Admin;
 import Shoping.Entity.Customer;
+import Shoping.Entity.Product;
 
 
 public class AdOperation {
@@ -34,5 +35,13 @@ public class AdOperation {
 		}else {
 			return false;
 		}
+	}
+	public Product ProductOps(String Pname, double Pamount) {
+		Product p = new Product();
+		p.setProduct_Name(Pname);
+		p.setProduct_Price(Pamount);
+		p.setAdmin_Id(RunShoping.CurrAdId);
+		return p;
+		
 	}
 }

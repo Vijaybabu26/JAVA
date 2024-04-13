@@ -8,7 +8,15 @@ public class Admin {
 	private long AdPhoneNo;
 	private String AdAddress;
 	private String AdPassWord;
-	
+//	private Wallet AdWallet;
+//	
+//	
+//	public Wallet getAdWallet() {
+//		return AdWallet;
+//	}
+//	public void setAdWallet(Wallet adWallet) {
+//		AdWallet = adWallet;
+//	}
 	public int getAdId() {
 		return AdId;
 	}
@@ -46,5 +54,5 @@ public class Admin {
 		AdPassWord = adPassWord;
 	}
 	
-//	private Wallet Wallet;
+	
 }
