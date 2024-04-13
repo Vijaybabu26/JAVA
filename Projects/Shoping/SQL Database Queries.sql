@@ -6,7 +6,7 @@ CREATE TABLE Admin_Info (
     Admin_PNO LONG,
     Admin_Address VARCHAR(40),
     Admin_PassWord VARCHAR(20),
-    Curr_Wallet_Bal DOUBLE,
+    Curr_Wallet_Baladmin_transaction DOUBLE,
     PRIMARY KEY (Admin_Id)
 );
 select * from Admin_info;
@@ -33,6 +33,7 @@ CREATE TABLE Products_Info (
         REFERENCES Admin_Info (Admin_Id)
 );
 desc Products_info;
+select * from products_info;
 CREATE TABLE Admin_Transaction (
     Ad_Txn_Id VARCHAR(45) NOT NULL,
     Ad_Txn_Date DATE,
@@ -50,6 +51,7 @@ CREATE TABLE Admin_Transaction (
         REFERENCES customer_info (Cus_Id)
 );
 drop table Admin_Transaction;
+Select * from Admin_Transaction;
 Create table Cus_Transaction(
 	Cus_TxnId varchar(45) Not Null,
     Cus_Txn_Date date,
@@ -57,12 +59,25 @@ Create table Cus_Transaction(
     Cus_Txn_Type Varchar(20),
     Cus_Id int,
     Product_Id int,
-    Cus_Order_Status Varchar(20),
     PRIMARY KEY (Cus_TxnId),
     FOREIGN KEY (Cus_Id)
         REFERENCES Customer_Info (Cus_Id),
 	FOREIGN KEY (Product_Id)
         REFERENCES Products_info (Product_Id)
+);
+select * from Cus_Transaction;
+create table Cus_Order_status(
+	Order_Id Varchar(45),
+	Product_Id int,
+    Cus_Id int,
+    Admin_Id int,
+    Order_status Varchar(20),
+    FOREIGN KEY (Cus_Id)
+        REFERENCES Customer_Info (Cus_Id),
+	FOREIGN KEY (Product_Id)
+        REFERENCES Products_info (Product_Id),
+	FOREIGN KEY (Admin_Id)
+        REFERENCES admin_info (Admin_Id)
 );
 
 
