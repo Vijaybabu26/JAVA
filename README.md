@@ -12,34 +12,42 @@
 <img align="right" height="150" src="https://i.pinimg.com/originals/81/17/8b/81178b47a8598f0c81c4799f2cdd4057.gif"  />
 
 ###
+- 🔭 I’m currently working on **Payments Banking Web APP**
 
+- 🌱 I’m currently learning **Full Stack Java Developer Course**
+
+- 👯 I’m looking to collaborate on **Payments CLI App**
+
+- 📫 My E-Mail ID ---> **Vijaybabuponnada1@gmail.com**
+  
 <div align="left">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="50" alt="javascript logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" height="70" alt="javascript logo"  />
   <img width="12" />
- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="50" alt="typescript logo"  />
+<!--  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" height="50" alt="typescript logo"  />
+  <img width="12" /> -->
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="70" alt="react logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" height="50" alt="react logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="70" alt="html5 logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" height="50" alt="html5 logo"  />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="70" alt="css3 logo"  />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" height="50" alt="css3 logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50" alt="python logo"  />
-  <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" height="50" alt="csharp logo"  />
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" height="70"/> 
+ 
+  <img src="https://www.versionmuseum.com/images/applications/adobe-photoshop/adobe-photoshop%5E2019%5Ephotoshop-logo.jpg" height="70" alt="Adobe logo"  />
+  <img src="https://cdn.springpeople.com/media/JSP%20and%20Servle.png" height="70" alt="gmail logo"  />
+  <img src="https://download.logo.wine/logo/Spring_Framework/Spring_Framework-Logo.wine.png" height="90" alt="Spring logo"  />
+<!--   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="50" alt="python logo"  />
+  <img width="12" /> -->
+<!--   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" height="50" alt="csharp logo"  /> -->
 </div>
 
-###
+
+
 
 <div align="left">
-  <img src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg" height="50" alt="youtube logo"  />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/2048px-Instagram_logo_2016.svg.png" height="50" alt="instagram logo"  />
-      <img src="https://git-scm.com/images/logos/downloads/Git-Icon-1788C.png" height="60" alt="gmail logo"  />
-   <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Logo_of_Twitter.svg/512px-Logo_of_Twitter.svg.png" height="60" alt="twitch logo"  />
-  <img src="https://www.versionmuseum.com/images/applications/adobe-photoshop/adobe-photoshop%5E2019%5Ephotoshop-logo.jpg" height="70" alt="discord logo"  />
-  <img src="https://1000logos.net/wp-content/uploads/2018/04/Gmail-logo-new.jpg" height="60" alt="gmail logo"  />
-  <img src="https://logos-world.net/wp-content/uploads/2020/04/Linkedin-Logo.png" height="60" alt="linkedin logo"  />
+<!--   <img src="https://t3.ftcdn.net/jpg/03/00/38/90/360_F_300389025_b5hgHpjDprTySl8loTqJRMipySb1rO0I.jpg" height="70" alt="youtube logo"  /> -->
+  
+  
 </div>
 
 ###
