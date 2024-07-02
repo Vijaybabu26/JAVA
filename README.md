@@ -2,6 +2,8 @@
 
 ###
 
+<img src="350kb.gif" width="1000" height="100">
+
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vijaybabu26&theme=dark&hide_border=true&include_all_commits=true&count_private=true&layout=compact" height="155" alt="stats graph"  />
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vijaybabu26&theme=dark&hide_border=true" height="155" alt="languages graph"  />
