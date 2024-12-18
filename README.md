@@ -43,7 +43,7 @@
   <img width="12" /> -->
 <!--   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" height="50" alt="csharp logo"  /> -->
 </div>
-
+<h2> Portfolio Url : <a>https://vijaybabu26.github.io/Portfolio/</a></h2>
 
 
 
